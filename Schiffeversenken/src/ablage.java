@@ -88,14 +88,14 @@ if (hoch - (schiff[i] - 1) > 0) {
 //Autor: Lukas Kirmaier
 //Datum: 12.02.2019
 
-import java.util.;
+import java.util.*;
 public class Diskriminante {
 
 public static void main(String[] args) {
  double a ; 
  double b ;
  double c ;
- double D ;
+ double d ;
 
  System.out.println("Bitte geben sie a ein");
  System.out.println("Bitte geben sie b ein");
@@ -107,10 +107,10 @@ public static void main(String[] args) {
  b = sc.nextInt();
  c = sc.nextInt();
 
- d = (b*(b–4)*a)*c ;
+ d = (b*(b–4.0)*a)*c ;
 
 
- if (d = 0) {
+ if (d == 0) {
    System.out.println(" es gibt nur eine Lösung");
  if  (d > 0) {
      System.out.println(" es gibt zwei Lösungen");

@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.lang.*;
 
 public class SchiffeversenkenPvK {
 	public SchiffeversenkenPvK() {
@@ -25,51 +26,83 @@ public class SchiffeversenkenPvK {
 				p4[x][y] = 0;
 			}
 		}
-		for (int i = 0; i < schiff.length; i++) {
-			hoch = rand.nextInt(10);
-			tief = rand.nextInt(10);
-
-			if (testefeld(p1, hoch, tief, schiff, i) == false) {
-				hoch = rand.nextInt(10);
-				tief = rand.nextInt(10);
-				i = i - 1;
-
-			} else {
-				for (int a = 0; a < (schiff[i]); a++) {
-					p1[(hoch + a)][(tief)] = 1;
-
-				}
-
-			}
-
-		}
 
 		for (int i = 0; i < schiff.length; i++) {
 			hoch = rand.nextInt(10);
 			tief = rand.nextInt(10);
+			int waagodersenk = rand.nextInt(2);
+			if (waagodersenk == 1) {
+				if (testefeldsenk(p1, hoch, tief, schiff, i) == false) {
+					hoch = rand.nextInt(10);
+					tief = rand.nextInt(10);
+					i = i - 1;
 
-			if (testefeld(p2, hoch, tief, schiff, i) == false) {
-				hoch = rand.nextInt(10);
-				tief = rand.nextInt(10);
-				i = i - 1;
+				} else {
+					for (int a = 0; a < (schiff[i]); a++) {
+						p1[(hoch + a)][(tief)] = 1;
 
-			} else {
-				for (int a = 0; a < (schiff[i]); a++) {
-					p2[(hoch + a)][(tief)] = 1;
+					}
 
 				}
+			} else {
+				if (testefeldwaag(p1, hoch, tief, schiff, i) == false) {
+					hoch = rand.nextInt(10);
+					tief = rand.nextInt(10);
+					i = i - 1;
 
+				} else {
+					for (int a = 0; a < (schiff[i]); a++) {
+						p1[(hoch)][(tief + a)] = 1;
+
+					}
+
+				}
 			}
 
 		}
+		for (int i = 0; i < schiff.length; i++) {
+			hoch = rand.nextInt(10);
+			tief = rand.nextInt(10);
+			int waagodersenk = rand.nextInt(2);
+			if (waagodersenk == 1) {
+				if (testefeldsenk(p2, hoch, tief, schiff, i) == false) {
+					hoch = rand.nextInt(10);
+					tief = rand.nextInt(10);
+					i = i - 1;
+
+				} else {
+					for (int a = 0; a < (schiff[i]); a++) {
+						p2[(hoch + a)][(tief)] = 1;
+
+					}
+
+				}
+			} else {
+				if (testefeldwaag(p2, hoch, tief, schiff, i) == false) {
+					hoch = rand.nextInt(10);
+					tief = rand.nextInt(10);
+					i = i - 1;
+
+				} else {
+					for (int a = 0; a < (schiff[i]); a++) {
+						p2[(hoch)][(tief + a)] = 1;
+
+					}
+
+				}
+			}
+
+		}
+
 		// KIP1
 		int x = 0;
 		int y = 0;
 		int schwierigkeit = 1;
 		int normal;
 		boolean schwer = true;
-		System.out.println(
-				"Um die Schwierigkeit einzustellen geben sie eine Zahl zwischen 1 und 100 an.Wobei 1 Höllenschwer ist. Wenn sie normal spielen wollen geben sie 101 an.");
+		System.out.println("Um die Schwierigkeit einzustellen geben sie eine Zahl"
+				+ " zwischen 1 und 100 an Wobei 1 Höllenschwer ist. Wenn sie normal spie"
+				+ "len wollen geben sie 101 an");
 		schwierigkeit = sc.nextInt();
 		if (schwierigkeit == 101) {
 			schwer = false;
@@ -77,6 +110,9 @@ public class SchiffeversenkenPvK {
 
 		int counter = 0;
 		String eingabe = "NULL";
+		ausgabe(p3, tabelle);
+		System.out.println("*******************************");
+		ausgabe(p1, tabelle);
 		while (testrunde(p1, p2) == true) {
 			treffer = true;
 			while (treffer == true) {
@@ -89,38 +125,38 @@ public class SchiffeversenkenPvK {
 					y = (sc.nextInt() - 1);
 					System.out.println("Y");
 					eingabe = sc.next();
-					eingabe =eingabe.toUpperCase();
+					eingabe = eingabe.toUpperCase();
 					if (eingabe.equals("A")) {
 						x = 0;
-					}else if(eingabe.equals("B")) {
+					} else if (eingabe.equals("B")) {
 						x = 1;
-					}else if(eingabe.equals("C")) {
+					} else if (eingabe.equals("C")) {
 						x = 2;
-					}else if(eingabe.equals("D")) {
+					} else if (eingabe.equals("D")) {
 						x = 3;
-					}else if(eingabe.equals("E")) {
+					} else if (eingabe.equals("E")) {
 						x = 4;
-					}else if(eingabe.equals("F")) {
+					} else if (eingabe.equals("F")) {
 						x = 5;
-					}else if(eingabe.equals("G")) {
+					} else if (eingabe.equals("G")) {
 						x = 6;
-					}else if(eingabe.equals("H")) {
+					} else if (eingabe.equals("H")) {
 						x = 7;
-					}else if(eingabe.equals("I")) {
+					} else if (eingabe.equals("I")) {
 						x = 8;
-					}else if(eingabe.equals("J")) {
+					} else if (eingabe.equals("J")) {
 						x = 9;
-					}
-					else {
+					} else {
 						treffer = false;
 					}
-					
+
 					if (x > 10 || x < 0 || y > 10 || y < 0) {
 						System.out.println("Ihre Eingabe ist ungültig. Bitte wiederholen Sie diese.");
 						treffer = false;
 					}
 					if (p1[x][y] == 3 || p1[x][y] == 4) {
-						System.out.println("Hier haben Sie schon hingeschschossen. Bitte wiederholen sie ihre Eingabe.");
+						System.out
+								.println("Hier haben Sie schon hingeschschossen. Bitte wiederholen sie ihre Eingabe.");
 						treffer = false;
 					}
 
@@ -153,19 +189,19 @@ public class SchiffeversenkenPvK {
 				x = rand.nextInt(10);
 				y = rand.nextInt(10);
 				if (schwer == true) {
-				normal = rand.nextInt(schwierigkeit) + 1;
-				if (normal == 1) {
-					for (int i = 0; i < p1.length; i++) {
-						for (int a = 0; a < p1[0].length; a++) {
-							if (p1[i][a] == 1) {
-								x = i;
-								y = a;
-								a = 9;
-								i = 9;
+					normal = rand.nextInt(schwierigkeit) + 1;
+					if (normal == 1) {
+						for (int i = 0; i < p1.length; i++) {
+							for (int a = 0; a < p1[0].length; a++) {
+								if (p1[i][a] == 1) {
+									x = i;
+									y = a;
+									a = 9;
+									i = 9;
+								}
 							}
 						}
 					}
-				}
 				}
 				counter = 0;
 				treffer = true;
@@ -184,17 +220,29 @@ public class SchiffeversenkenPvK {
 					// System.out.println("Schusskoordinate = " + x + " " + y);
 					// System.out.println("Treffer");
 					treffer = true;
-					if (p1[x + 1][y] == 0) {
-						x = x - counter;
-						x--;
-					} else {
-						x++;
-						counter++;
+					if (p1[x+1][y] ==1||p1[x-1][y] ==1){
+						if (p1[x + 1][y] == 0) {
+							x = x - counter;
+							x--;
+						} else {
+							x++;
+							counter++;
+						}
 					}
+					else{
+						if (p1[x][y+1] == 0) {
+							y = y - counter;
+							y--;
+						} else {
+							y++;
+							counter++;
+						}
+					}
+					
 
 					/*
-					 * if (p2[(x + 1)][y] == 1) { counter++; x++; } else { x = x - counter; counter
-					 * = 0; x--;
+					 * if (p2[(x + 1)][y] == 1) { counter++; x++; } else { x = x
+					 * - counter; counter = 0; x--;
 					 * 
 					 * }
 					 */
@@ -215,17 +263,18 @@ public class SchiffeversenkenPvK {
 		 * ausgabe(p1, tabelle); while (testrunde(p1, p2) == true) { // p1KI
 		 * 
 		 * System.out.println("P1KI"); ausgabe(p1, tabelle); treffer = true; x =
-		 * rand.nextInt(10); y = rand.nextInt(10); counter = 0; test3 = 1; test4 = 0;
-		 * while (treffer == true) {
+		 * rand.nextInt(10); y = rand.nextInt(10); counter = 0; test3 = 1; test4
+		 * = 0; while (treffer == true) {
 		 * 
-		 * if (schuss(p1, p2, x, y) == true) { p1[x][y] = 4; if (test == false &&
-		 * treffer == true) { x++; counter++; test4 = 1; ausgabe(p1, tabelle); } else {
-		 * if (test3 == 1) { x = x - counter; test3 = 0; } x--;
+		 * if (schuss(p1, p2, x, y) == true) { p1[x][y] = 4; if (test == false
+		 * && treffer == true) { x++; counter++; test4 = 1; ausgabe(p1,
+		 * tabelle); } else { if (test3 == 1) { x = x - counter; test3 = 0; }
+		 * x--;
 		 * 
 		 * ausgabe(p1, tabelle); }
 		 * 
-		 * treffer = true; } else { if (test4 == 1 && treffer == true) { test = true; }
-		 * else { test = false; } p1[x][y] = 3; treffer = false;
+		 * treffer = true; } else { if (test4 == 1 && treffer == true) { test =
+		 * true; } else { test = false; } p1[x][y] = 3; treffer = false;
 		 * 
 		 * }
 		 * 
@@ -238,7 +287,7 @@ public class SchiffeversenkenPvK {
 		new SchiffeversenkenPvK();
 	}
 
-	public boolean testefeld(int p1[][], int hoch, int tief, int schiff[], int i) {
+	public boolean testefeldsenk(int p1[][], int hoch, int tief, int schiff[], int i) {
 		boolean test = true;
 		if (hoch - (schiff[i]) >= 0 && hoch + (schiff[i]) <= 9 && tief - 1 >= 0 && tief + 1 <= 9) {
 			if (p1[(hoch + 1)][tief] != 1 && p1[(hoch - 1)][tief] != 1 && p1[(hoch)][tief] != 1) {
@@ -246,6 +295,35 @@ public class SchiffeversenkenPvK {
 					if (test == true) {
 						if (p1[(hoch + a)][tief] != 1 && p1[(hoch)][tief] != 1) {
 							if (p1[hoch + a][tief - 1] == 1 || p1[hoch + a][tief + 1] == 1 || p1[hoch + a][tief] == 1) {
+
+								return false;
+							}
+						} else {
+
+							return false;
+						}
+					} else {
+						return false;
+					}
+				}
+				return true;
+
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	public boolean testefeldwaag(int p1[][], int hoch, int tief, int schiff[], int i) {
+		boolean test = true;
+		if (tief - (schiff[i]) >= 0 && tief + (schiff[i]) <= 9 && hoch - 1 >= 0 && hoch + 1 <= 9) {
+			if (p1[(hoch)][tief + 1] != 1 && p1[(hoch)][tief - 1] != 1 && p1[(hoch + 1)][tief] != 1 && p1[(hoch - 1)][tief] != 1&& p1[(hoch)][tief] != 1) {
+				for (int a = 0; a <= (schiff[i]); a++) {
+					if (test == true) {
+						if (p1[(hoch)][tief + a] != 1 && p1[(hoch)][tief] != 1) {
+							if (p1[hoch - 1][tief + a] == 1 || p1[hoch + 1][tief - a] == 1 || p1[hoch][tief + a] == 1) {
 
 								return false;
 							}
