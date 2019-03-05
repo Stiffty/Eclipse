@@ -297,6 +297,7 @@ public class SchiffeversenkenPvK {
 					 * }
 					 */
 				} else {
+					
 
 					p4[x][y] = 3;
 					p1[x][y] = 3;
