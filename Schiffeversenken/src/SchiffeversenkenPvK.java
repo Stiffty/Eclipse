@@ -14,6 +14,15 @@ public class SchiffeversenkenPvK {
 		int hoch;
 		int tief;
 		boolean treffer = true;
+		boolean oben = false;
+		boolean unten = false;
+		boolean rechts = false;
+		boolean links = false;
+		int getroffen = 1;
+		int getroffentest = 0;
+		int xS = 0;
+		int yS = 0;
+		int getroffenFail = 0;
 
 		Random rand = new Random();
 		Scanner sc = new Scanner(System.in);
@@ -97,9 +106,10 @@ public class SchiffeversenkenPvK {
 		// KIP1
 		int x = 0;
 		int y = 0;
-		int schwierigkeit = 1;
+		int schwierigkeit = 102;
 		int normal;
 		boolean schwer = true;
+		while (schwierigkeit>101 || schwierigkeit <1){
 		System.out.println("Um die Schwierigkeit einzustellen geben sie eine Zahl"
 				+ " zwischen 1 und 100 an Wobei 1 Höllenschwer ist. Wenn sie normal spie"
 				+ "len wollen geben sie 101 an");
@@ -107,7 +117,7 @@ public class SchiffeversenkenPvK {
 		if (schwierigkeit == 101) {
 			schwer = false;
 		}
-
+		}
 		int counter = 0;
 		String eingabe = "NULL";
 		ausgabe(p3, tabelle);
@@ -154,7 +164,7 @@ public class SchiffeversenkenPvK {
 						System.out.println("Ihre Eingabe ist ungültig. Bitte wiederholen Sie diese.");
 						treffer = false;
 					}
-					if (p1[x][y] == 3 || p1[x][y] == 4) {
+					if (p3[x][y] == 3 || p3[x][y] == 4) {
 						System.out
 								.println("Hier haben Sie schon hingeschschossen. Bitte wiederholen sie ihre Eingabe.");
 						treffer = false;
@@ -185,29 +195,46 @@ public class SchiffeversenkenPvK {
 			}
 
 			// KIP2
+
 			while (treffer == false) {
-				x = rand.nextInt(10);
-				y = rand.nextInt(10);
-				if (schwer == true) {
-					normal = rand.nextInt(schwierigkeit) + 1;
-					if (normal == 1) {
-						for (int i = 0; i < p1.length; i++) {
-							for (int a = 0; a < p1[0].length; a++) {
-								if (p1[i][a] == 1) {
-									x = i;
-									y = a;
-									a = 9;
-									i = 9;
+				x = xS;
+				y = yS;
+				if (oben == false && unten == false && rechts == false && links == false
+						|| oben == true && unten == true && rechts == true && links == true) {
+					oben = false;
+					unten = false;
+					rechts = false;
+					links = false;
+					getroffen = 1;
+                    xS = x;
+                    yS = y;
+					getroffentest = 0;
+
+					x = rand.nextInt(10);
+					y = rand.nextInt(10);
+					if (p2[x][y] == 3 || p2[x][y] == 4) {
+						treffer = false;
+					}
+					if (schwer == true) {
+						normal = rand.nextInt(schwierigkeit) + 1;
+						if (normal == 1) {
+							for (int i = 0; i < p1.length; i++) {
+								for (int a = 0; a < p1[0].length; a++) {
+									if (p1[i][a] == 1) {
+										x = i;
+										y = a;
+										a = 9;
+										i = 9;
+									}
 								}
 							}
 						}
 					}
 				}
+				
 				counter = 0;
 				treffer = true;
-				if (p2[x][y] == 3 || p2[x][y] == 4) {
-					treffer = false;
-				}
+				
 			}
 			while (treffer == true) {
 				System.out.println("Boom Boom!! Ihr Gegner hat geschossen.");
@@ -220,35 +247,99 @@ public class SchiffeversenkenPvK {
 					// System.out.println("Schusskoordinate = " + x + " " + y);
 					// System.out.println("Treffer");
 					treffer = true;
-					if (p1[x+1][y] ==1||p1[x-1][y] ==1){
-						if (p1[x + 1][y] == 0) {
-							x = x - counter;
-							x--;
-						} else {
-							x++;
-							counter++;
-						}
+
+					switch (getroffen) {
+					case 1:
+						x++;
+						getroffentest = 1;
+						counter++;
+						oben = true;
+						break;
+
+					case 2:
+						
+						x--;
+						getroffentest = 2;
+						counter++;
+						unten = true;
+						getroffenFail = 0;
+						break;
+					case 3:
+						
+						y--;
+						getroffentest = 3;
+						counter++;
+						links = true;
+						getroffenFail = 0;
+						break;
+					case 4:
+						
+						y++;
+						getroffentest = 4;
+						counter++;
+						rechts = true;
+						getroffenFail = 0;
+						break;
+					default:
+						break;
 					}
-					else{
-						if (p1[x][y+1] == 0) {
-							y = y - counter;
-							y--;
-						} else {
-							y++;
-							counter++;
-						}
-					}
-					
 
 					/*
-					 * if (p2[(x + 1)][y] == 1) { counter++; x++; } else { x = x
-					 * - counter; counter = 0; x--;
+					 * if (p1[x + 1][y] == 1 || p1[x - 1][y] == 1) { if (p1[x + 1][y] == 0) { x = x
+					 * - counter; x--; } else { x++; counter++; } } else { if (p1[x][y + 1] == 0) {
+					 * y = y - counter; y--; } else { y++; counter++; } }
+					 */
+
+					/*
+					 * if (p2[(x + 1)][y] == 1) { counter++; x++; } else { x = x - counter; counter
+					 * = 0; x--;
 					 * 
 					 * }
 					 */
 				} else {
+
 					p4[x][y] = 3;
 					p1[x][y] = 3;
+					if (oben == true && unten == true) {
+						rechts = true;
+						links = true;
+					}else if (rechts == true&&links == true) {
+						oben = true;
+						unten =  true;
+					}
+					if (getroffenFail == 1) {
+						getroffentest++;
+					}
+					if (getroffentest == 1) {
+						getroffen = 2;
+						xS = (x - counter) -1 ;
+						yS = y;
+						getroffenFail = 1;
+						if (counter == 0) {
+							unten = true;
+						}
+						
+					} else if (getroffentest == 2) {
+						getroffen = 3;
+						xS = (x + counter)+1 ;
+						yS = y-1;
+						getroffenFail = 1;
+						if (counter == 0) {
+							links = true;
+						}
+					}
+					else if (getroffentest == 3) {
+						getroffen = 4;
+						xS = x;
+						yS = (y + counter)+2;
+						getroffenFail = 1;
+						if (counter == 0) {
+							rechts = true;
+						}
+					}else if (getroffentest == 4) {
+						getroffen = 4;
+						
+					}
 					// System.out.println("P2");
 					// ausgabe(p4, tabelle);
 					// ausgabe(p2, tabelle);
@@ -257,24 +348,24 @@ public class SchiffeversenkenPvK {
 					treffer = false;
 				}
 			}
+			
 		}
 		/*
 		 * int x = 0; int y = 0; int counter = 0; int test3 = 0; int test4 = 0;
 		 * ausgabe(p1, tabelle); while (testrunde(p1, p2) == true) { // p1KI
 		 * 
 		 * System.out.println("P1KI"); ausgabe(p1, tabelle); treffer = true; x =
-		 * rand.nextInt(10); y = rand.nextInt(10); counter = 0; test3 = 1; test4
-		 * = 0; while (treffer == true) {
+		 * rand.nextInt(10); y = rand.nextInt(10); counter = 0; test3 = 1; test4 = 0;
+		 * while (treffer == true) {
 		 * 
-		 * if (schuss(p1, p2, x, y) == true) { p1[x][y] = 4; if (test == false
-		 * && treffer == true) { x++; counter++; test4 = 1; ausgabe(p1,
-		 * tabelle); } else { if (test3 == 1) { x = x - counter; test3 = 0; }
-		 * x--;
+		 * if (schuss(p1, p2, x, y) == true) { p1[x][y] = 4; if (test == false &&
+		 * treffer == true) { x++; counter++; test4 = 1; ausgabe(p1, tabelle); } else {
+		 * if (test3 == 1) { x = x - counter; test3 = 0; } x--;
 		 * 
 		 * ausgabe(p1, tabelle); }
 		 * 
-		 * treffer = true; } else { if (test4 == 1 && treffer == true) { test =
-		 * true; } else { test = false; } p1[x][y] = 3; treffer = false;
+		 * treffer = true; } else { if (test4 == 1 && treffer == true) { test = true; }
+		 * else { test = false; } p1[x][y] = 3; treffer = false;
 		 * 
 		 * }
 		 * 
@@ -319,7 +410,8 @@ public class SchiffeversenkenPvK {
 	public boolean testefeldwaag(int p1[][], int hoch, int tief, int schiff[], int i) {
 		boolean test = true;
 		if (tief - (schiff[i]) >= 0 && tief + (schiff[i]) <= 9 && hoch - 1 >= 0 && hoch + 1 <= 9) {
-			if (p1[(hoch)][tief + 1] != 1 && p1[(hoch)][tief - 1] != 1 && p1[(hoch + 1)][tief] != 1 && p1[(hoch - 1)][tief] != 1&& p1[(hoch)][tief] != 1) {
+			if (p1[(hoch)][tief + 1] != 1 && p1[(hoch)][tief - 1] != 1 && p1[(hoch + 1)][tief] != 1
+					&& p1[(hoch - 1)][tief] != 1 && p1[(hoch)][tief] != 1) {
 				for (int a = 0; a <= (schiff[i]); a++) {
 					if (test == true) {
 						if (p1[(hoch)][tief + a] != 1 && p1[(hoch)][tief] != 1) {
