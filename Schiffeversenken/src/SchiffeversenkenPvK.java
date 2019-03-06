@@ -106,17 +106,18 @@ public class SchiffeversenkenPvK {
 		// KIP1
 		int x = 0;
 		int y = 0;
+		int duchlauf = 0;
 		int schwierigkeit = 102;
 		int normal;
 		boolean schwer = true;
-		while (schwierigkeit>101 || schwierigkeit <1){
-		System.out.println("Um die Schwierigkeit einzustellen geben sie eine Zahl"
-				+ " zwischen 1 und 100 an Wobei 1 Höllenschwer ist. Wenn sie normal spie"
-				+ "len wollen geben sie 101 an");
-		schwierigkeit = sc.nextInt();
-		if (schwierigkeit == 101) {
-			schwer = false;
-		}
+		while (schwierigkeit > 101 || schwierigkeit < 1) {
+			System.out.println("Um die Schwierigkeit einzustellen geben sie eine Zahl"
+					+ " zwischen 1 und 100 an Wobei 1 Höllenschwer ist. Wenn sie normal spie"
+					+ "len wollen geben sie 101 an");
+			schwierigkeit = sc.nextInt();
+			if (schwierigkeit == 101) {
+				schwer = false;
+			}
 		}
 		int counter = 0;
 		String eingabe = "NULL";
@@ -199,6 +200,7 @@ public class SchiffeversenkenPvK {
 			while (treffer == false) {
 				x = xS;
 				y = yS;
+
 				if (oben == false && unten == false && rechts == false && links == false
 						|| oben == true && unten == true && rechts == true && links == true) {
 					oben = false;
@@ -206,8 +208,8 @@ public class SchiffeversenkenPvK {
 					rechts = false;
 					links = false;
 					getroffen = 1;
-                    xS = x;
-                    yS = y;
+					xS = x;
+					yS = y;
 					getroffentest = 0;
 
 					x = rand.nextInt(10);
@@ -231,10 +233,14 @@ public class SchiffeversenkenPvK {
 						}
 					}
 				}
-				
+				if (p4[x][y] == 3) {
+					getroffen++;
+					getroffentest++;
+				}
+
 				counter = 0;
 				treffer = true;
-				
+
 			}
 			while (treffer == true) {
 				System.out.println("Boom Boom!! Ihr Gegner hat geschossen.");
@@ -257,7 +263,7 @@ public class SchiffeversenkenPvK {
 						break;
 
 					case 2:
-						
+
 						x--;
 						getroffentest = 2;
 						counter++;
@@ -265,7 +271,7 @@ public class SchiffeversenkenPvK {
 						getroffenFail = 0;
 						break;
 					case 3:
-						
+
 						y--;
 						getroffentest = 3;
 						counter++;
@@ -273,7 +279,7 @@ public class SchiffeversenkenPvK {
 						getroffenFail = 0;
 						break;
 					case 4:
-						
+
 						y++;
 						getroffentest = 4;
 						counter++;
@@ -297,49 +303,48 @@ public class SchiffeversenkenPvK {
 					 * }
 					 */
 				} else {
-					
+					if (p4[x][y] == 3) {
+						getroffen++;
+						getroffentest++;
+					}else if (getroffenFail == 1) {
+						getroffentest++;
+					}
+
 
 					p4[x][y] = 3;
 					p1[x][y] = 3;
-					if (oben == true && unten == true) {
-						rechts = true;
-						links = true;
-					}else if (rechts == true&&links == true) {
-						oben = true;
-						unten =  true;
-					}
-					if (getroffenFail == 1) {
-						getroffentest++;
-					}
+					
+						
 					if (getroffentest == 1) {
 						getroffen = 2;
-						xS = (x - counter) -1 ;
+						xS = (x - counter) - 1;
 						yS = y;
+						getroffenFail = 1;
+						if (counter == 0) {
+							oben = true;
+						}
+
+					} else if (getroffentest == 2) {
+						getroffen = 3;
+						xS = (x + counter) + 1;
+						yS = y - 1;
 						getroffenFail = 1;
 						if (counter == 0) {
 							unten = true;
 						}
-						
-					} else if (getroffentest == 2) {
-						getroffen = 3;
-						xS = (x + counter)+1 ;
-						yS = y-1;
+					} else if (getroffentest == 3) {
+						getroffen = 4;
+						xS = x;
+						yS = (y + counter) + 2;
 						getroffenFail = 1;
 						if (counter == 0) {
 							links = true;
 						}
-					}
-					else if (getroffentest == 3) {
+					} else if (getroffentest == 4) {
 						getroffen = 4;
-						xS = x;
-						yS = (y + counter)+2;
-						getroffenFail = 1;
 						if (counter == 0) {
 							rechts = true;
 						}
-					}else if (getroffentest == 4) {
-						getroffen = 4;
-						
 					}
 					// System.out.println("P2");
 					// ausgabe(p4, tabelle);
@@ -347,9 +352,16 @@ public class SchiffeversenkenPvK {
 					// System.out.println("Verfehlt");
 					// System.out.println("Schusskoordinate = " + x + " " + y);
 					treffer = false;
+					/*if (oben == true && unten == true) {
+						rechts = true;
+						links = true;
+					} else if (rechts == true && links == true) {
+						oben = true;
+						unten = true;
+					}*/
 				}
 			}
-			
+
 		}
 		/*
 		 * int x = 0; int y = 0; int counter = 0; int test3 = 0; int test4 = 0;
