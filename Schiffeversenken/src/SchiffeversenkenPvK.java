@@ -106,7 +106,7 @@ public class SchiffeversenkenPvK {
 		// KIP1
 		int x = 0;
 		int y = 0;
-		int duchlauf = 0;
+		int counter2 = 0;
 		int schwierigkeit = 102;
 		int normal;
 		boolean schwer = true;
@@ -200,7 +200,10 @@ public class SchiffeversenkenPvK {
 			while (treffer == false) {
 				x = xS;
 				y = yS;
-
+				if (rechts == false && links == false && oben == true && unten == true && counter2 > 1) {
+					links = true;
+					rechts = true;
+				}
 				if (oben == false && unten == false && rechts == false && links == false
 						|| oben == true && unten == true && rechts == true && links == true) {
 					oben = false;
@@ -208,12 +211,12 @@ public class SchiffeversenkenPvK {
 					rechts = false;
 					links = false;
 					getroffen = 1;
-					xS = x;
-					yS = y;
 					getroffentest = 0;
 
 					x = rand.nextInt(10);
 					y = rand.nextInt(10);
+					xS = x;
+					yS = y;
 					if (p2[x][y] == 3 || p2[x][y] == 4) {
 						treffer = false;
 					}
@@ -232,10 +235,6 @@ public class SchiffeversenkenPvK {
 							}
 						}
 					}
-				}
-				if (p4[x][y] == 3) {
-					getroffen++;
-					getroffentest++;
 				}
 
 				counter = 0;
@@ -259,7 +258,9 @@ public class SchiffeversenkenPvK {
 						x++;
 						getroffentest = 1;
 						counter++;
+						counter2++;
 						oben = true;
+						getroffenFail = 0;
 						break;
 
 					case 2:
@@ -303,18 +304,14 @@ public class SchiffeversenkenPvK {
 					 * }
 					 */
 				} else {
-					if (p4[x][y] == 3) {
-						getroffen++;
-						getroffentest++;
-					}else if (getroffenFail == 1) {
+
+					if (getroffenFail == 1) {
 						getroffentest++;
 					}
 
-
 					p4[x][y] = 3;
 					p1[x][y] = 3;
-					
-						
+
 					if (getroffentest == 1) {
 						getroffen = 2;
 						xS = (x - counter) - 1;
@@ -332,6 +329,7 @@ public class SchiffeversenkenPvK {
 						if (counter == 0) {
 							unten = true;
 						}
+
 					} else if (getroffentest == 3) {
 						getroffen = 4;
 						xS = x;
@@ -340,26 +338,24 @@ public class SchiffeversenkenPvK {
 						if (counter == 0) {
 							links = true;
 						}
+
 					} else if (getroffentest == 4) {
 						getroffen = 4;
 						if (counter == 0) {
 							rechts = true;
 						}
 					}
-					
+
 					// System.out.println("P2");
 					// ausgabe(p4, tabelle);
 					// ausgabe(p2, tabelle);
 					// System.out.println("Verfehlt");
 					// System.out.println("Schusskoordinate = " + x + " " + y);
 					treffer = false;
-					/*if (oben == true && unten == true) {
-						rechts = true;
-						links = true;
-					} else if (rechts == true && links == true) {
-						oben = true;
-						unten = true;
-					}*/
+					/*
+					 * if (oben == true && unten == true) { rechts = true; links = true; } else if
+					 * (rechts == true && links == true) { oben = true; unten = true; }
+					 */
 				}
 			}
 
