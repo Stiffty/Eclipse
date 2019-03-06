@@ -346,6 +346,7 @@ public class SchiffeversenkenPvK {
 							rechts = true;
 						}
 					}
+					
 					// System.out.println("P2");
 					// ausgabe(p4, tabelle);
 					// ausgabe(p2, tabelle);
