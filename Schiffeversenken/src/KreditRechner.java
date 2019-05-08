@@ -74,4 +74,8 @@ double getZinsen(double betrag, double zinssatz) {
     double effzins = (kreditKosten / nettodarlehen)(24./(laufzeit12+1)) *100;
     return effzins;
   }
+
+public static void main(String[] args) {
+	focdownloads.blogspot.com
+}
 } // end of class MethodTes
