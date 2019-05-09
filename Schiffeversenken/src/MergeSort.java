@@ -55,15 +55,19 @@ public class MergeSort {
 		int swich = 1;
 		int ES = E;
 		int AS = A;
-		for (int i = A; i < (E * div) - A; i++) {
+		int []kon = new int[8];
+		for (int i = 0; i < (E * div) - A; i++) {
 
 			// ablage[A] = Feld[A];
-
+			
 			if (Feld[AS] > Feld[ES]) {
 				safe = Feld[AS];
 				Feld[AS] = Feld[ES];
 				Feld[ES] = safe;
 				
+				if(swich == 1) {
+					A++;
+				}else {
 				
 				if (ES < 7) {// Wichtig
 					
@@ -73,7 +77,7 @@ public class MergeSort {
 				else {
 					ES = 4;
 				}
-			
+				}
 			} else if (Feld[AS] < Feld[ES]) {
 				AS++;
 			
