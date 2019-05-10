@@ -1,10 +1,17 @@
 package Schule;
-
+import java.lang.*;
 public class AutoUi {
 
 	private int ps[] = {200, 150, 300};
 	private String Name [] = {"Mercedes", "VW", "Porsche"};
 	
+	public void ps(int ps,int stelle){
+		this.ps[stelle] = ps;
+	}
+	
+	public void name(String name,int stelle){
+		this.Name[stelle] = name;
+	}
 	public void ausgabe(int stelle){
 		if(stelle == 0){
 			for (int i = 0; i < Name.length; i++) {
@@ -16,7 +23,11 @@ public class AutoUi {
 		}
 	}
 	private double  berechneKW(double ps){
-		return ps*1.35;
+		
+		ps*=0.735499;
+		
+		return ps=Math.rint(ps*100)/100;
+		 
 	}
-
+	
 }

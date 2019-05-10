@@ -4,6 +4,7 @@ public class MergeSort {
 	private static int[] Feld = new int[8];
 	private static int[] ablage = new int[8];
 	private static int div = 1;
+	private static int div2 = 1;
 
 	public MergeSort() {
 		// TODO Auto-generated constructor stub
@@ -42,7 +43,7 @@ public class MergeSort {
 		
 		for (int i = 0; i < (Feld.length / 2) / 4; i++) {
 
-			merge(A, E);
+			//merge(A, E);
 			
 
 		}
@@ -52,37 +53,77 @@ public class MergeSort {
 
 	public static void merge(int A, int E) {
 		int safe;
-		int swich = 1;
+		int swichE = 0;
+		int swichA = 1;
 		int ES = E;
 		int AS = A;
 		int []kon = new int[8];
-		for (int i = 0; i < (E * div) - A; i++) {
+		for (int i = 0; i < (E * div) - (A*div); i++) {
 
 			// ablage[A] = Feld[A];
+			
+			if(AS == ES&&ES == AS){
+				if(ES<7){
+					
+					ES++;
+				}else{
+					
+					A++;
+				}
+			}
 			
 			if (Feld[AS] > Feld[ES]) {
 				safe = Feld[AS];
 				Feld[AS] = Feld[ES];
 				Feld[ES] = safe;
 				
-				if(swich == 1) {
-					A++;
-				}else {
-				
+				if(swichE == 1){
 				if (ES < 7) {// Wichtig
 					
 						ES++;
+						
+						swichE=0;
 					//AS++;
 				}
 				else {
 					ES = 4;
+					
+					swichE=0;
 				}
+				}else{
+					if(AS<7){
+					AS++;
+					swichE=1;
+					}
 				}
 			} else if (Feld[AS] < Feld[ES]) {
-				AS++;
+				
+				if(swichA == 1){
+					if (AS < 7) {// Wichtig
+						
+							
+							
+							swichA=0;
+						AS++;
+					}
+					else {
+						AS = 4;
+						
+						swichA=0;
+					}
+					}else{
+						if(ES<7){
+						ES++;
+						swichA = 1;
+						}
+						
+					}
 			
 			}
 			
+		}
+		if(div2 == 1){
+			div2 = 0;
 		}
 	}
 }
