@@ -39,12 +39,14 @@ public class MergeSort {
 			E += 4;
 
 		}
-		A = 0;E=4;
+		A = 0;
+		E=4;
 		
 		for (int i = 0; i < (Feld.length / 2) / 4; i++) {
 
-			//merge(A, E);
-			
+			merge(A, E);
+			A+=8;
+			E+=8;
 
 		}
 
@@ -62,15 +64,7 @@ public class MergeSort {
 
 			// ablage[A] = Feld[A];
 			
-			if(AS == ES&&ES == AS){
-				if(ES<7){
-					
-					ES++;
-				}else{
-					
-					A++;
-				}
-			}
+			
 			
 			if (Feld[AS] > Feld[ES]) {
 				safe = Feld[AS];
@@ -84,11 +78,6 @@ public class MergeSort {
 						
 						swichE=0;
 					//AS++;
-				}
-				else {
-					ES = 4;
-					
-					swichE=0;
 				}
 				}else{
 					if(AS<7){
@@ -104,6 +93,7 @@ public class MergeSort {
 							
 							
 							swichA=0;
+							swichE=1;
 						AS++;
 					}
 					else {
@@ -122,8 +112,6 @@ public class MergeSort {
 			}
 			
 		}
-		if(div2 == 1){
-			div2 = 0;
-		}
+		
 	}
 }
