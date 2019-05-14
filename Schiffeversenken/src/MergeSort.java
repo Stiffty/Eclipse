@@ -44,7 +44,7 @@ public class MergeSort {
 		
 		for (int i = 0; i < (Feld.length / 2) / 4; i++) {
 
-			merge(A, E);
+			//merge(A, E);
 			A+=8;
 			E+=8;
 
@@ -78,6 +78,8 @@ public class MergeSort {
 						
 						swichE=0;
 					//AS++;
+				}else {
+					AS++;
 				}
 				}else{
 					if(AS<7){
@@ -97,7 +99,6 @@ public class MergeSort {
 						AS++;
 					}
 					else {
-						AS = 4;
 						
 						swichA=0;
 					}
@@ -105,6 +106,8 @@ public class MergeSort {
 						if(ES<7){
 						ES++;
 						swichA = 1;
+						}else {
+							A++;
 						}
 						
 					}

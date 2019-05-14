@@ -31,7 +31,9 @@ public class DualRechnen {
 		      zahl = zahl%23;
 		       
 		      if (zahl == 0) {
-		        System.out.println(i);
+		        System.out.println("1");
+		      }else {
+		    	  System.out.println("0");
 		      }
 		      zahl = i+1;
 		    }
