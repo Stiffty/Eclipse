@@ -2,10 +2,10 @@ package Schule;
 
 public class AutoTest {
 
-	public AutoTest() {
+	public AutoTest(String name) {
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		AutoUi Au1 = new AutoUi();  
