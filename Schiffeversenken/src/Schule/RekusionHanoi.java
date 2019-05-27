@@ -2,16 +2,19 @@ package Schule;
 
 public class RekusionHanoi {
 
-	private int[][] one = {{3,2,1},
-			               {0,0,0},
-			               {0,0,0}};
-	
-	private int n = 3;
+	private static int[][] one = {{4,3,2,1},
+			                      {0,0,0,0},
+			                      {0,0,0,0}};
+	private static int stapel = 3;
+	private static int y = stapel;
+	public static int x = 0;
+	public static int test = 0;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		
-		
+		ausgabe();
+		lös(2,0);
+		ausgabe();
 	}
 
 	private void pressAnyKeyToContinue()
@@ -25,32 +28,36 @@ public class RekusionHanoi {
 	        {}  
 	 }
 	
-	public void hanoi(int x, int y,int xs,int ys){
-		y = 0;
-		for (int i = one[0].length; i >= 0  ; i--) {
-			
-			if(one[x][i] == 0){
-				y = i;
-			}
-		}
+	public static void lös(int xs, int ys){
 		
-		if(){
+		one[xs][ys] = one [x][y];
+		one [x][y] = 0;
+		y-=1;
+		if(xs == 2 && ys== stapel||xs == 1 && ys== stapel){
 			
 		}else{
+			lös(xs, ys +=1);
 			
+			xs = 1;
+			ys = 0;
+			x = 2;
+		    y = stapel;
+		    test++;
+		    if(test == 1){
+		    	ausgabe();
+		    lös(xs,ys);
+		    }
 		}
 	}
-	
-	public void leer(){
+	public static void ausgabe(){
 		for (int i = 0; i < one.length; i++) {
+			System.out.println(" ");
 			for (int j = 0; j < one[0].length; j++) {
-				if(one[i][j] == 0&&j == 0){
-					one[i][j] = n;
-				}
+				System.out.print(one[i][j] + " ");
 			}
 		}
-	}
-	public void ver(){
-		
+		System.out.println("  ");
 	}
 }
+	
+	
