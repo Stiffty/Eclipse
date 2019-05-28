@@ -9,7 +9,7 @@ public class RekusionFibonacciFolge {
 		folge(0,1,400);
 	}
 
-	public static void folge(int a, int b, int end){
+	public static void folge(long a, long b, long end){
 		
 		if(end == 0){
 			

@@ -10,8 +10,9 @@ public class DualinBin {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		while(true) {
-			
+		int a = 1;
+		if (a == 1 && a == 2 && a == 3) {
+            System.out.println("true");
 		}
 	}
 
