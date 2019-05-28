@@ -9,7 +9,7 @@ public class RekusionDualMulti {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		umR(23);
+		umR(45);
 	}
 	
 	public static void umR(int dez){
