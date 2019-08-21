@@ -19,7 +19,7 @@ public class Rechner {
 			System.out.println("Ergebnis: " + ergebnis);
 			test = false;
 		}else {
-			System.out.println("Eingabe ungülig");
+			System.out.println("Eingabe sinngülig");
 		}
 		}
 	}
