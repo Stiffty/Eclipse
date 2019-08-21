@@ -12,6 +12,7 @@ public class AutoTest {
 		Au1.name("Ford", 1);
 		Au1.ps(500,2);
 		Au1.ausgabe(0);
+		AutoUi Au1 = new AutoUi();
 	}
 
 }
