@@ -7,8 +7,6 @@ public class RegalMain {
 	
 	private int hoehe = 240;
 	private int breite = 120;
-	private int tiefe = 40;
-	private int BuecherGesamt = 0;
 	private int fachnummer = 0;
 	private List<Fach> Faecher = new ArrayList<Fach>();
 	
