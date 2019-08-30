@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.osgi_3.13.300.v20190218-1622.jar" sourcepath="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.osgi.source_3.13.300.v20190218-1622.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.core.commands_3.9.400.v20190516-1358.jar" sourcepath="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.core.commands_3.9.400.v20190516-1358.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.equinox.common_3.10.300.v20190218-2100.jar" sourcepath="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.equinox.common.source_3.10.300.v20190218-2100.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.equinox.registry_3.8.300.v20190218-2100.jar" sourcepath="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.equinox.registry.source_3.8.300.v20190218-2100.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.core.runtime_3.15.200.v20190301-1641.jar" sourcepath="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.core.runtime.source_3.15.200.v20190301-1641.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.text_3.8.200.v20190519-2344.jar" sourcepath="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.text_3.8.200.v20190519-2344.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.swt.win32.win32.x86_64_3.110.0.v20190305-0602.jar" sourcepath="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.swt.win32.win32.x86_64.source_3.110.0.v20190305-0602.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.jface_3.15.100.v20190222-1334.jar" sourcepath="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.jface.source_3.15.100.v20190222-1334.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.jface.text_3.15.200.v20190519-2344.jar" sourcepath="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.jface.text_3.15.200.v20190519-2344.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.ui.workbench_3.113.0.v20190219-1432.jar" sourcepath="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.ui.workbench.source_3.113.0.v20190219-1432.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elach/Desktop/Alles/eclipse/plugins/com.ibm.icu_63.1.0.v20181030-1705.jar" sourcepath="C:/Users/elach/Desktop/Alles/eclipse/plugins/com.ibm.icu.source_63.1.0.v20181030-1705.jar"/>
+	<classpathentry kind="lib" path="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.ui.forms_3.7.500.v20190216-1545.jar" sourcepath="C:/Users/elach/Desktop/Alles/eclipse/plugins/org.eclipse.ui.forms.source_3.7.500.v20190216-1545.jar"/>
+	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
