@@ -9,8 +9,8 @@ public class BS {
 	private int version;
 	private int patch;
 	private int anzahlProzesse;
-	private Prozess[] prozess = new Prozess[15];
-	private HDD[] hdd = new HDD[20];
+	private Prozess[] prozess;
+	private HDD[] hdd;
 
 	public BS(String n, int v, int p, Prozess pro, String h, double k) {
 		// TODO Auto-generated constructor stub
@@ -18,15 +18,17 @@ public class BS {
 		this.name = n;
 		this.version = v;
 		this.patch = p;
-		HDD hdd1 = new HDD(h, k);
-		hinzufuegen(hdd1);
-
+		
+		prozess = new Prozess[15];
 		for (int i = 0; i < this.prozess.length; i++) {
 			prozess[i] = null;
 		}
+		hdd = new HDD[20];
 		for (int i = 0; i < this.hdd.length; i++) {
 			hdd[i] = null;
 		}
+	    HDD hdd1 = new HDD(h, k);
+		hinzufuegen(hdd1);
 
 	}
 
