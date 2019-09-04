@@ -8,6 +8,14 @@ public class HDD {
 	
 	public HDD(String h,double k) {
 		// TODO Auto-generated constructor stub
+		this.hersteller = h;
+		this.kapazitaet = k;
+	}
+
+	public HDD(String hersteller, double kapazitaet, char partition) {
+		this.hersteller = hersteller;
+		this.kapazitaet = kapazitaet;
+		this.partition = partition;
 	}
 
 	public String getHersteller() {

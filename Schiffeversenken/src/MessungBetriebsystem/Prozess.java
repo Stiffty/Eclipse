@@ -9,10 +9,17 @@ public class Prozess {
 	
 	public Prozess(String n,boolean b) {
 		// TODO Auto-generated constructor stub
+		this.name = n;
+		this.bereit = b;
 	}
 	public Prozess(String n,boolean l,boolean b,int p) {
 		// TODO Auto-generated constructor stub
+		this.name = n;
+		this.laufend = l;
+		this.bereit = b;
+		this.prio = p;
 	}
+	
 	public String getName() {
 		return name;
 	}

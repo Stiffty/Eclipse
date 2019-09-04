@@ -18,23 +18,24 @@ public class BS {
 		this.name = n;
 		this.version = v;
 		this.patch = p;
-		
+
 		prozess = new Prozess[15];
 		for (int i = 0; i < this.prozess.length; i++) {
 			prozess[i] = null;
 		}
+		hinzufuegen(pro);
 		hdd = new HDD[20];
 		for (int i = 0; i < this.hdd.length; i++) {
 			hdd[i] = null;
 		}
-	    HDD hdd1 = new HDD(h, k);
-		hinzufuegen(hdd1);
+		
+		hinzufuegen(new HDD(h, k));
 
 	}
 
 	public int hinzufuegen(Prozess pro) {
 
-		if (sucheLeerstelleProzess(prozess) == (Integer) null) {
+		if (sucheLeerstelleProzess(prozess) == -1) {
 			return 0;
 		} else {
 			prozess[sucheLeerstelleProzess(prozess)] = pro;
@@ -63,10 +64,11 @@ public class BS {
 
 	public boolean hinzufuegen(HDD hdd) {
 
-		if (sucheLeerstelleHDD(this.hdd) == (Integer) null) {
+		if (sucheLeerstelleHDD(this.hdd) == -1) {
 			return false;
 		} else {
 			this.hdd[sucheLeerstelleHDD(this.hdd)] = hdd;
+			hddPartitionSetzen(this.hdd[sucheLeerstelleHDD(this.hdd)]);
 			return true;
 		}
 
@@ -75,8 +77,16 @@ public class BS {
 	public boolean entferneHDD(char p) {
 		for (int i = 0; i < hdd.length; i++) {
 			if (this.hdd[i].getPartition() == p) {
-				this.hdd[i] = null;
-				return true;
+				try {
+					for (int j = i; j < hdd.length; j++) {
+						this.hdd[j] = this.hdd[j+1];
+						hddPartitionSetzen(this.hdd[j]);
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+					return true;
+				}
+				
 			}
 		}
 		return false;
@@ -85,6 +95,7 @@ public class BS {
 	public boolean tauscheHDD(char partition, HDD hdd) {
 		for (int i = 0; i < this.hdd.length; i++) {
 			if (this.hdd[i].getPartition() == partition) {
+				hdd.setPartition(this.hdd[i].getPartition());
 				this.hdd[i] = hdd;
 				return true;
 			}
@@ -96,40 +107,43 @@ public class BS {
 
 		double ges = 0;
 		for (int i = 0; i < hdd.length; i++) {
-			if(hdd[i] != null){
-				ges+=hdd[i].getKapazitaet();
+			if (hdd[i] != null) {
+				ges += hdd[i].getKapazitaet();
 			}
 		}
-		return ges;
+		return  ges;
 	}
 
 	public String toStringHDDs() {
 
-		String aus = "HDDs derPCs:"+System.lineSeparator();
-		for (int i = 0; i < hdd.length; i++) {
-			aus += i+1 +
-					". Partition" +
-					hdd[i].getPartition()+
-					": "+
-					"Hersteller: " +
-					hdd[i].getHersteller() +
-					", Kapazitaet : " +
-					hdd[i].getKapazitaet() +
-					" GB "+System.lineSeparator();
+		String aus = "HDDs des PCs:" + System.lineSeparator();
+		try {
+			for (int i = 0; i < hdd.length; i++) {
+				aus += i + 1 + ". Partition " + hdd[i].getPartition() + ": " + "Hersteller: " + hdd[i].getHersteller()
+						+ ", Kapazitaet : " + hdd[i].getKapazitaet() + " GB " + System.lineSeparator();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			return aus;
 		}
+		
 		return aus;
 	}
 
 	public String toStringProzesse() {
 
-		String aus = "Prozesse des PC:"+ System.lineSeparator();
-		for (int i = 0; i < prozess.length; i++) {
-			aus+= "1. "+
-					prozess[i].getName()+", "+
-					prozess[i].isLaufend()+", "+
-					prozess[i].isBereit()+", Prio "+
-					prozess[i].getPrio()+System.lineSeparator();
+		
+		String aus = "Prozesse des PC:" + System.lineSeparator();
+		try {
+			for (int i = 0; i < prozess.length; i++) {
+				aus += "1. " + prozess[i].getName() + ", " + prozess[i].isLaufend() + ", " + prozess[i].isBereit()
+						+ ", Prio " + prozess[i].getPrio() + System.lineSeparator();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			return aus;
 		}
+		
 		return aus;
 	}
 
@@ -140,7 +154,7 @@ public class BS {
 				return i;
 			}
 		}
-		return (Integer) null;
+		return -1;
 	}
 
 	@SuppressWarnings("null")
@@ -150,7 +164,7 @@ public class BS {
 				return i;
 			}
 		}
-		return (Integer) null;
+		return -1;
 	}
 
 	private boolean hddPartitionbezeichnungTest(HDD hdd) {
@@ -159,15 +173,29 @@ public class BS {
 		Random rd = new Random();
 
 		if (part >= 68 && part <= 90) {
+
+			boolean test = true;
+			do {
+
+				hdd.setPartition((char) part);
+
+				for (int i = 0; i < this.hdd.length; i++) {
+					if (hdd.getPartition() != (char) part) {
+						test = false;
+					}
+				}
+
+			} while (test == true);
 			return true;
 		} else {
 			boolean test = true;
+			
 			do {
-				int rnd = 68 + rd.nextInt(22);
-				hdd.setPartition((char) rnd);
+				part++;
+				hdd.setPartition((char) part);
 
 				for (int i = 0; i < this.hdd.length; i++) {
-					if (hdd.getPartition() != (char) rnd) {
+					if (hdd.getPartition() != (char) part) {
 						test = false;
 					}
 				}
@@ -175,6 +203,18 @@ public class BS {
 			} while (test == true);
 			return true;
 		}
+	}
+
+	private void hddPartitionSetzen(HDD hdd ) {
+		int i = 67;
+		for (int j = 0; j < this.hdd.length; j++) {
+			if(this.hdd[j+1] == null&&this.hdd[j] != null ) {
+				this.hdd[j].setPartition((char)i);
+				break;
+		}else {
+			i++;
+		}
+	}
 	}
 
 	@Override
