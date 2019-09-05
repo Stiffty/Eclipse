@@ -11,10 +11,12 @@ public class BS {
 	private int anzahlProzesse;
 	private Prozess[] prozess;
 	private HDD[] hdd;
+	
 
 	public BS(String n, int v, int p, Prozess pro, String h, double k) {
 		// TODO Auto-generated constructor stub
 
+		
 		this.name = n;
 		this.version = v;
 		this.patch = p;
@@ -69,6 +71,7 @@ public class BS {
 		} else {
 			this.hdd[sucheLeerstelleHDD(this.hdd)] = hdd;
 			hddPartitionSetzen(this.hdd[sucheLeerstelleHDD(this.hdd)]);
+			
 			return true;
 		}
 
@@ -114,14 +117,14 @@ public class BS {
 		return  ges;
 	}
 
-	public String toStringHDDs() {
+	public String toStringHDDs(int i) {
 
-		String aus = "HDDs des PCs:" + System.lineSeparator();
+		String aus = "";
 		try {
-			for (int i = 0; i < hdd.length; i++) {
+			
 				aus += i + 1 + ". Partition " + hdd[i].getPartition() + ": " + "Hersteller: " + hdd[i].getHersteller()
 						+ ", Kapazitaet : " + hdd[i].getKapazitaet() + " GB " + System.lineSeparator();
-			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			return aus;
@@ -130,15 +133,15 @@ public class BS {
 		return aus;
 	}
 
-	public String toStringProzesse() {
+	public String toStringProzesse(int i) {
 
 		
-		String aus = "Prozesse des PC:" + System.lineSeparator();
+		String aus = "";
 		try {
-			for (int i = 0; i < prozess.length; i++) {
-				aus += "1. " + prozess[i].getName() + ", " + prozess[i].isLaufend() + ", " + prozess[i].isBereit()
+			
+				aus += i+1 + prozess[i].getName() + ", " + prozess[i].isLaufend() + ", " + prozess[i].isBereit()
 						+ ", Prio " + prozess[i].getPrio() + System.lineSeparator();
-			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			return aus;
