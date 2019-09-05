@@ -60,7 +60,6 @@ public class PCGUI {
 		getFrame().getContentPane().setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("HDDs:");
-		lblNewLabel.setBorder(UIManager.getBorder("CheckBox.border"));
 		lblNewLabel.setBounds(10, 39, 46, 14);
 		getFrame().getContentPane().add(lblNewLabel);
 		panel.add(lblNewLabel);
