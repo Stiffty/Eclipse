@@ -9,12 +9,18 @@ import java.util.*;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JRadioButtonMenuItem;
 import javax.swing.SwingUtilities;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.UIManager;
+import javax.swing.JList;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.Color;
+import javax.swing.JPopupMenu;
+import javax.swing.JButton;
+import java.awt.Panel;
+import java.awt.SystemColor;
 
 public class PCGUI {
 	private JFrame frame;
@@ -60,7 +66,8 @@ public class PCGUI {
 		getFrame().getContentPane().setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("HDDs:");
-		lblNewLabel.setBounds(10, 39, 46, 14);
+		lblNewLabel.setForeground(Color.BLACK);
+		lblNewLabel.setBounds(10, 30, 46, 24);
 		getFrame().getContentPane().add(lblNewLabel);
 		panel.add(lblNewLabel);
 
@@ -92,6 +99,16 @@ public class PCGUI {
 			}
 		});
 		mnNewMenu.add(mntmAddHdd);
+		
+		JMenuItem mntmAddProzess = new JMenuItem("Add Prozess");
+		mntmAddProzess.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				AddProzess addpro = new AddProzess(pc);
+			}
+		});
+		mnNewMenu.add(mntmAddProzess);
+		//list.
 	}
 
 	public void addLabel() {
@@ -108,8 +125,8 @@ public class PCGUI {
 		
 		SwingUtilities.updateComponentTreeUI(frame);
 		
-		lblNewLabel_1.setText("FFFFFFFF");
 		lblNewLabel_1.setText(Double.toString(bs.brerechneGesamtkazitaet()));
+		
 	}
 
 	public JFrame getFrame() {
@@ -118,5 +135,8 @@ public class PCGUI {
 
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
+		frame.setResizable(false);
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
 	}
 }

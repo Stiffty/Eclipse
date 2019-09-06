@@ -4,6 +4,9 @@ public class PC {
 
 	private int hddkapa;
 	private String hddname;
+	private String proname;
+	private int prio;
+	
 	private BS bs;
 	private PCGUI gui;
 	public PC(BS bs,PCGUI gui) {
@@ -23,14 +26,29 @@ public class PC {
 		this.gui = gui;
 	}
 	
-	public void ersteHDD() {
-		gui.addLabel();
-	}
-	
 	public void addhdd() {
 		bs.hinzufuegen(new HDD(hddname,hddkapa));
 		gui.addLabel();
 		System.out.println();
+	}
+	public void addpro(){
+		bs.hinzufuegen(new Prozess(proname,true,false,prio));
+	}
+
+	public String getProname() {
+		return proname;
+	}
+
+	public void setProname(String proname) {
+		this.proname = proname;
+	}
+
+	public int getPrio() {
+		return prio;
+	}
+
+	public void setPrio(int prio) {
+		this.prio = prio;
 	}
 
 	public int getHddkapa() {
