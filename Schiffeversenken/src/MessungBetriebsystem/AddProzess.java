@@ -70,14 +70,6 @@ public class AddProzess extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						progressBar.setValue(50);
-						SwingUtilities.updateComponentTreeUI(contentPanel);
-						try {
-							TimeUnit.SECONDS.sleep(1);
-						} catch (InterruptedException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
 						pc.setProname(txtProzessName.getText());
 						pc.setPrio((int) spinner.getValue());
 						pc.addpro();
