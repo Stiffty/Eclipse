@@ -6,6 +6,8 @@ public class PC {
 	private String hddname;
 	private String proname;
 	private int prio;
+	private boolean b;
+	private boolean l;
 	
 	private BS bs;
 	private PCGUI gui;
@@ -29,10 +31,26 @@ public class PC {
 	public void addhdd() {
 		bs.hinzufuegen(new HDD(hddname,hddkapa));
 		gui.addLabel();
-		System.out.println();
 	}
 	public void addpro(){
-		bs.hinzufuegen(new Prozess(proname,true,false,prio));
+		bs.hinzufuegen(new Prozess(proname,l,b,prio));
+		gui.addPro();
+	}
+
+	public boolean isB() {
+		return b;
+	}
+
+	public void setB(boolean b) {
+		this.b = b;
+	}
+
+	public boolean isL() {
+		return l;
+	}
+
+	public void setL(boolean l) {
+		this.l = l;
 	}
 
 	public String getProname() {

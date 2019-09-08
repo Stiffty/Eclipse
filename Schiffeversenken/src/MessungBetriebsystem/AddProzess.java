@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import javax.swing.JProgressBar;
+import javax.swing.JCheckBox;
 
 public class AddProzess extends JDialog {
 
@@ -33,7 +34,7 @@ public class AddProzess extends JDialog {
 	 */
 	public AddProzess(PC pc) {
 		setResizable(false);
-		setBounds(100, 100, 153, 203);
+		setBounds(100, 100, 183, 203);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -59,9 +60,13 @@ public class AddProzess extends JDialog {
 		lblNewLabel_1.setBounds(10, 67, 60, 14);
 		contentPanel.add(lblNewLabel_1);
 		
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setBounds(0, 123, 146, 14);
-		contentPanel.add(progressBar);
+		JCheckBox chckbxBereit = new JCheckBox("Bereit");
+		chckbxBereit.setBounds(111, 119, 60, 23);
+		contentPanel.add(chckbxBereit);
+		
+		JCheckBox chckbxLaufend = new JCheckBox("Laufend");
+		chckbxLaufend.setBounds(6, 119, 90, 23);
+		contentPanel.add(chckbxLaufend);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -72,6 +77,8 @@ public class AddProzess extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						pc.setProname(txtProzessName.getText());
 						pc.setPrio((int) spinner.getValue());
+						pc.setL(chckbxLaufend.isSelected());
+						pc.setB(chckbxBereit.isSelected());
 						pc.addpro();
 						dispose();
 					}

@@ -21,12 +21,12 @@ public class BS {
 		this.version = v;
 		this.patch = p;
 
-		prozess = new Prozess[15];
+		prozess = new Prozess[9];
 		for (int i = 0; i < this.prozess.length; i++) {
 			prozess[i] = null;
 		}
 		hinzufuegen(pro);
-		hdd = new HDD[20];
+		hdd = new HDD[9];
 		for (int i = 0; i < this.hdd.length; i++) {
 			hdd[i] = null;
 		}
@@ -40,7 +40,12 @@ public class BS {
 		if (sucheLeerstelleProzess(prozess) == -1) {
 			return 0;
 		} else {
-			prozess[sucheLeerstelleProzess(prozess)] = pro;
+			try {
+				prozess[sucheLeerstelleProzess(prozess)] = pro;
+			} catch (Exception e) {
+				// TODO: handle exception
+				return 0;
+			}
 			return 1;
 		}
 	}
@@ -57,7 +62,7 @@ public class BS {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			prozess[14] = null;
+			prozess[8] = null;
 
 		}
 		return 1;
@@ -69,8 +74,14 @@ public class BS {
 		if (sucheLeerstelleHDD(this.hdd) == -1) {
 			return false;
 		} else {
-			this.hdd[sucheLeerstelleHDD(this.hdd)] = hdd;
-			hddPartitionSetzen(this.hdd[sucheLeerstelleHDD(this.hdd)]);
+			try {
+				this.hdd[sucheLeerstelleHDD(this.hdd)] = hdd;
+				hddPartitionSetzen(this.hdd[sucheLeerstelleHDD(this.hdd)]);
+			} catch (Exception e) {
+				// TODO: handle exception
+				return false;
+			}
+			
 			
 			return true;
 		}
@@ -139,8 +150,8 @@ public class BS {
 		String aus = "";
 		try {
 			
-				aus += i+1 + prozess[i].getName() + ", " + prozess[i].isLaufend() + ", " + prozess[i].isBereit()
-						+ ", Prio " + prozess[i].getPrio() + System.lineSeparator();
+				aus += i+1 +". Name: "+ prozess[i].getName() + ", Laufend: " + prozess[i].isLaufend() + ", Bereit: " + prozess[i].isBereit()
+						+ ", Prio: " + prozess[i].getPrio() + System.lineSeparator();
 			
 		} catch (Exception e) {
 			// TODO: handle exception
