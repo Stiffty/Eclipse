@@ -2,6 +2,7 @@ package Praktikumsorganisation;
 
 public class Lehrkraft {
 
+	
 	private String name;
 	private String fachbereich;
 	private boolean isProfessor;
@@ -30,6 +31,11 @@ public class Lehrkraft {
 	}
 	public void setProfessor(boolean isProfessor) {
 		this.isProfessor = isProfessor;
+	}
+	
+	@Override
+	public String toString() {
+		return "Lehrkraft [name=" + name + ", fachbereich=" + fachbereich + ", isProfessor=" + isProfessor + "]";
 	}
 
 }
