@@ -14,6 +14,11 @@ public class Lehrkraft {
 		this.isProfessor = i;
 	}
 	
+	@Override
+	public String toString() {
+		return "Lehrkraft [name=" + name + ", fachbereich=" + fachbereich + ", isProfessor=" + isProfessor + "]";
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -33,9 +38,6 @@ public class Lehrkraft {
 		this.isProfessor = isProfessor;
 	}
 	
-	@Override
-	public String toString() {
-		return "Lehrkraft [name=" + name + ", fachbereich=" + fachbereich + ", isProfessor=" + isProfessor + "]";
-	}
+	
 
 }

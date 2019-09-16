@@ -12,15 +12,15 @@ public class Student {
 		this.durchschnitt = durchschnitt;
 		this.semester = semester;
 	}
-	public void Student(String n,double d,int s){
-		
-	}
+	
 	@Override
 	public String toString() {
 		return name +" (" + durchschnitt + ", " + semester + ")";
 	}
 	public String toStringPraktika (){
-		
+		return "Aktuelle Praktika von " + name +
+				"(Semester: " + semester + ")" ;
+				
 	}
 
 }
