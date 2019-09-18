@@ -1,5 +1,7 @@
 package Praktikumsorganisation;
 
+
+
 public class Lehrkraft {
 
 	
