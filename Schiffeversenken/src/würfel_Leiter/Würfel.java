@@ -14,7 +14,7 @@ public class Würfel {
 	}
 	public void setAugenzahl(int augenzahl) {
 		this.augenzahl = augenzahl;
-		);
+		
 	}
 	
 }
