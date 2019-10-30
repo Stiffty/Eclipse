@@ -12,7 +12,6 @@ public class Server_comunicator {
 		// TODO Auto-generated constructor stub
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Test1");
 		try {
 			DataInputStream in = new DataInputStream(client.getInputStream());
 			System.out.println(in.readUTF());

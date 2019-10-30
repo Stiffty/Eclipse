@@ -16,7 +16,7 @@ public class Client {
 			Socket client = new Socket("10.18.6.2", 1134);
 			
 			DataOutputStream out = new DataOutputStream(client.getOutputStream());
-			out.writeUTF("Hello i am " + client.getRemoteSocketAddress() +"\n"+ client.getLocalAddress());
+			out.writeUTF("Hello i am " + Inet4Address.getLocalHost());
 			
 			DataInputStream in = new DataInputStream(client.getInputStream());
 			System.out.println(in.readUTF());
@@ -44,8 +44,8 @@ public class Client {
 			
 			while(true) {
 				
-				out.writeUTF(client.getLocalAddress() + ": " + (String) sc.next());
-				
+				out.writeUTF("<" + Inet4Address.getLocalHost()  + "> " + (String) sc.next());
+				//client.getLocalAddress()
 			}
 			
 			
