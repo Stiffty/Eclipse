@@ -28,31 +28,33 @@ public class Spieler {
 		ausgabeLeiterkarte();
 		
 		for (int i = 0; i < wuerfel.length; i++) {
-			wuerfel[i].setAugenzahl(rand.nextInt(5)+1);
+			wuerfel[i].setAugenzahl(rand.nextInt(6)+1);
 		}
 		
-		System.out.println(name + " hat Gewürfelt: ");
+		System.out.println(name+ "("+ anzGewonneneSpiele +")" + " hat Gewürfelt: ");
 		ausgabeWürfel();
 		
 		for (int i = 0; i < wuerfel.length; i++) {
 			System.out.println("Würfel " + (i+1) +" Nochmal ? j/n");
 			if(sc.next().equals("j")){
-				wuerfel[i].setAugenzahl(rand.nextInt(5)+1);
+				wuerfel[i].setAugenzahl(rand.nextInt(6)+1);
 				System.out.print("Es wurde gewürfelt: ");
 				ausgabeWürfel();
 			}
 		}
 		for (int i = 0; i < wuerfel.length; i++) {
-			if(sucheNechsteStufe() == 0){
-				return true;
-			}
 			
-				if(wuerfel[i].getAugenzahl() == (sucheNechsteStufe()+1)){
-					leiterkarte.setlK(true, sucheNechsteStufe());
-				
+
+			for (int j = 0; j < wuerfel.length; j++) {
+			if(wuerfel[j].getAugenzahl() == (sucheNechsteStufe()+1)){
+				leiterkarte.setlK(true, sucheNechsteStufe());
 			}
 		}
+			
+				
+		}
 		ausgabeLeiterkarte();
+		System.out.println("-------------------------");
 		for (int i = 0; i < leiterkarte.getlK().length; i++) {
 			if(leiterkarte.getlKW(i) == false){
 				return false;

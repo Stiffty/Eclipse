@@ -16,6 +16,7 @@ public class TestKlass {
 		WürfelLeiterSpiel wls = new WürfelLeiterSpiel();
 		wls.anmeldenSpieler();
 		wls.anmeldenSpieler();
+		wls.spielen();
 	}
 
 }
