@@ -1,9 +1,0 @@
-<<<<<<< HEAD
-gf:fg
-ds:sd
-fd:fg
-hg:gh
-=======
-test:678:0
-Sp:098:0
->>>>>>> branch 'master' of https://github.com/StiffTV/Eclipse.git
