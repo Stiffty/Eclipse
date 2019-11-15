@@ -75,6 +75,16 @@ public class Login extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						speicher s = new speicher();
+						
+						if(s.login(textField.getText(), s.encryptThisString(new String (passwordField.getPassword())))) {
+						firma f = new speicher().Laden(textField.getText());
+						System.out.println(f.getFirmenname());
+						}
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);

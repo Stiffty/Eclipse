@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import würfel_Leiter.TestKlass;
+
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -78,8 +81,16 @@ public class register extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						dialog.setVisible(true);
-						frame.dispose();
+						
+						if(isPassEqual() == true) {
+							speicher s = new speicher();
+							s.registrieren(textField.getText(), s.encryptThisString(new String(passwordField.getPassword())));
+							firma f = new firma(textField.getText());
+							s.Speichern(f);
+							dialog.setVisible(true);
+							frame.dispose();
+						}
+						
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -101,5 +112,14 @@ public class register extends JDialog {
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 	}
-
+	
+	public boolean isPassEqual() {
+		if(passwordField.getPassword()!= null&& passwordField_1.getPassword()!= null) {
+			
+		if (new String(passwordField.getPassword()).equals(new String(passwordField_1.getPassword()))) {
+			return true;
+		}
+		}
+		return false;
+	}
 }

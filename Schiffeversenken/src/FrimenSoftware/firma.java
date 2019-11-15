@@ -2,8 +2,9 @@ package FrimenSoftware;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class firma {
+public class firma implements Serializable {
 
 	private String firmenname;
 	private double gesamtUmsatz;
@@ -31,5 +32,29 @@ public class firma {
 				werke.get(i).einstellenProduktion();
 			}
 		}
+	}
+
+	public String getFirmenname() {
+		return firmenname;
+	}
+
+	public void setFirmenname(String firmenname) {
+		this.firmenname = firmenname;
+	}
+
+	public double getGesamtUmsatz() {
+		return gesamtUmsatz;
+	}
+
+	public void setGesamtUmsatz(double gesamtUmsatz) {
+		this.gesamtUmsatz = gesamtUmsatz;
+	}
+
+	public List<werk> getWerke() {
+		return werke;
+	}
+
+	public void setWerke(List<werk> werke) {
+		this.werke = werke;
 	}
 }
