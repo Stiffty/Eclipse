@@ -15,11 +15,15 @@ public class SpielFeld {
 	
 	private int entrie = -1;
 	
+	private Spiel spiel;
+	
 	public SpielFeld() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void erstellen(JPanel contentpane ) {
+	public void erstellen(JPanel contentpane,Spiel spiel) {
+		this.spiel =  spiel;
+		
 		int xs = 10;
 		int ys = 11;
 		
@@ -60,34 +64,119 @@ public class SpielFeld {
 
 		}
 		
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 12; i++) {
 			
-			JButton btnNewButton = new JButton(Integer.toString(i+1));
-			btnNewButton.setToolTipText(Integer.toString(i));
-			btnNewButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					buttonAction_control(btnNewButton);
-				}
-			});
-			btnNewButton.setBounds((xg*i)+10, (yg+5)*9, xg, yg);
-			buttons_control[i] = btnNewButton; 
-			contentpane.add(btnNewButton);
+			if(i == 9 ) {
+				JButton btnNewButton = new JButton("Reset");
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						for(JButton[] a: buttons_grid) {
+							for(JButton b: a) {
+								b.setBackground(new Color(238,238,238));
+								b.setText("");
+							}
+						}
+						while(test_leer() == false) {
+							buttonAction_reset(btnNewButton);
+							System.gc();
+						}
+						spiel.entfernen();
+					}
+				});
+				btnNewButton.setBounds((xg*i)+10, (yg+5)*9, xg+50, yg);
+				contentpane.add(btnNewButton);
+			}else if(i == 10){
+				JButton btnNewButton = new JButton("Mark");
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						entrie = -2;
+					}
+				});
+				btnNewButton.setBounds((xg-1*i), (yg+12)*9, xg+50, yg);
+				contentpane.add(btnNewButton);
+			}else if(i == 11){
+				JButton btnNewButton = new JButton("Solve");
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						for(JButton[] x: buttons_grid) {
+							for(JButton y: x) {
+								y.setText(y.getToolTipText().split(":")[2]);
+							}
+							}
+					}
+				});
+				btnNewButton.setBounds((xg*i)-78, (yg+12)*9, xg+50, yg);
+				contentpane.add(btnNewButton);
+			}else {
+			
+			
+				JButton btnNewButton = new JButton(Integer.toString(i+1));
+				btnNewButton.setToolTipText(Integer.toString(i));
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						buttonAction_control(btnNewButton);
+					}
+				});
+				btnNewButton.setBounds((xg*i)+10, (yg+5)*9, xg, yg);
+				buttons_control[i] = btnNewButton; 
+				contentpane.add(btnNewButton);
+			}
+			
 		}
 		 
 	}
 	
 	public void buttonAction_grid(JButton b) {
-		if(entrie != -1) {
+		if(entrie > 0&&spiel.test_line(Integer.parseInt(b.getToolTipText().split(":")[0]),Integer.parseInt(b.getToolTipText().split(":")[1]),entrie) == true&&spiel.test_square(Integer.parseInt(b.getToolTipText().split(":")[0]),Integer.parseInt(b.getToolTipText().split(":")[1]),entrie) == true) {
 			b.setText(Integer.toString(entrie));
+		} 
+		 if(b.getBackground() == Color.GREEN&&entrie == -2) {
+			b.setBackground(Color.ORANGE);
+		}else if(entrie == -2){
+			b.setBackground(Color.GREEN);
 		}
+		 check_win();
 	}
 	
 	public void buttonAction_control(JButton b) {
 		for(JButton i: buttons_control) {
 			i.setBackground(new ColorUIResource(238,238,238));
 		}
-		b.setBackground(Color.RED);
+		b.setBackground(Color.PINK);
 		entrie = Integer.parseInt(b.getText());
+	}
+	
+	public void buttonAction_reset(JButton b) {
+		for(JButton[] x: buttons_grid) {
+			for(JButton y: x) {
+				y.setText("");
+			}
+			}
+		
+			spiel.Füllen();
+		
+	
+	}
+	boolean test_leer() {
+		for(JButton[] a: buttons_grid) {
+			for(JButton b: a) {
+				if(b.getText() == "" ) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	void check_win() {
+		for(JButton[] a: buttons_grid) {
+			for(JButton b: a) {
+				if(b.getText() == "" ) {
+					return;
+				}
+			}
+		}
+		new Win_Gui();
 	}
 
 	

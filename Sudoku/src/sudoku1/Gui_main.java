@@ -36,23 +36,15 @@ public class Gui_main extends JFrame {
 	 * Create the frame.
 	 */
 	public Gui_main() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 539, 611);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		spielfeld.erstellen(contentPane);
-		
-		JButton btnNewButton = new JButton("1");
-		btnNewButton.setToolTipText("test");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnNewButton.setBounds(37, 211, 39, 16);
-		contentPane.add(btnNewButton);
-		spiel.Füllen();
+		spielfeld.erstellen(contentPane,spiel);
+		//spiel.Füllen();
 	}
 }
