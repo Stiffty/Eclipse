@@ -5,8 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.plaf.ColorUIResource;
+
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;;
 
 public class SpielFeld {
 
@@ -16,13 +23,15 @@ public class SpielFeld {
 	private int entrie = -1;
 	
 	private Spiel spiel;
+	private JLabel la;
 	
 	public SpielFeld() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void erstellen(JPanel contentpane,Spiel spiel) {
+	public void erstellen(JPanel contentpane,Spiel spiel,JSpinner s,JCheckBox b,JLabel la ) {
 		this.spiel =  spiel;
+		this.la = la;
 		
 		int xs = 10;
 		int ys = 11;
@@ -44,7 +53,7 @@ public class SpielFeld {
 				buttons_grid[tx][ty] = btnNewButton; 
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						buttonAction_grid(btnNewButton);
+						buttonAction_grid(btnNewButton,b);
 					}
 				});
 				btnNewButton.setBounds(x, y, xg, yg);
@@ -80,7 +89,8 @@ public class SpielFeld {
 							buttonAction_reset(btnNewButton);
 							System.gc();
 						}
-						spiel.entfernen();
+						spiel.entfernen(s);
+						timer();
 					}
 				});
 				btnNewButton.setBounds((xg*i)+10, (yg+5)*9, xg+50, yg);
@@ -126,11 +136,17 @@ public class SpielFeld {
 		 
 	}
 	
-	public void buttonAction_grid(JButton b) {
-		if(entrie > 0&&spiel.test_line(Integer.parseInt(b.getToolTipText().split(":")[0]),Integer.parseInt(b.getToolTipText().split(":")[1]),entrie) == true&&spiel.test_square(Integer.parseInt(b.getToolTipText().split(":")[0]),Integer.parseInt(b.getToolTipText().split(":")[1]),entrie) == true) {
+	public void buttonAction_grid(JButton b,JCheckBox s ) {
+		if(s.isSelected() == true) {
 			b.setText(Integer.toString(entrie));
-		} 
-		 if(b.getBackground() == Color.GREEN&&entrie == -2) {
+			b.setBackground(Color.PINK);
+		}else {
+			if(entrie > 0&&spiel.test_line(Integer.parseInt(b.getToolTipText().split(":")[0]),Integer.parseInt(b.getToolTipText().split(":")[1]),entrie) == true&&spiel.test_square(Integer.parseInt(b.getToolTipText().split(":")[0]),Integer.parseInt(b.getToolTipText().split(":")[1]),entrie) == true) {
+				b.setText(Integer.toString(entrie));
+				b.setBackground(Color.PINK);
+			}
+		}
+		if(b.getBackground() == Color.GREEN&&entrie == -2) {
 			b.setBackground(Color.ORANGE);
 		}else if(entrie == -2){
 			b.setBackground(Color.GREEN);
@@ -154,8 +170,7 @@ public class SpielFeld {
 			}
 		
 			spiel.Füllen();
-		
-	
+			la.setText("0");
 	}
 	boolean test_leer() {
 		for(JButton[] a: buttons_grid) {
@@ -177,6 +192,15 @@ public class SpielFeld {
 			}
 		}
 		new Win_Gui();
+	}
+	void timer() {
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			public void run() {
+				//aufgabe
+				la.setText(Integer.toString(Integer.parseInt(la.getText())+1));
+			}
+		},1000,1000);
 	}
 
 	

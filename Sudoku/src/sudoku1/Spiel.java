@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Random;
 
 import javax.swing.JButton;
+import javax.swing.JSpinner;
 import javax.swing.ToolTipManager;
 
 public class Spiel {
@@ -110,10 +111,10 @@ public class Spiel {
 		return true;
 	}
 	
-	public void entfernen() {
+	public void entfernen(JSpinner spinner) {
 		for (int i = 0; i < buttons.length; i++) {
 			for (int j = 0; j < buttons.length; j++) {
-				int r = rnd.nextInt(5);
+				int r = rnd.nextInt((Integer)spinner.getValue());
 				if(r == 0) {
 					buttons[i][j].setText("");
 				}

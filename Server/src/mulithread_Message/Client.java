@@ -13,7 +13,7 @@ public class Client {
 		try {
 			Scanner sc = new Scanner(System.in);
 			
-			Socket client = new Socket("10.18.6.2", 1134);
+			Socket client = new Socket("127.0.0.1", 1134);
 			
 			DataOutputStream out = new DataOutputStream(client.getOutputStream());
 			out.writeUTF("Hello i am " + Inet4Address.getLocalHost());
