@@ -58,7 +58,7 @@ public class Gui_Server extends JFrame {
 		btnStart.setBounds(15, 47, 57, 23);
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Server(Integer.parseInt(txtPort.getText()),contentPane);
+				new Server(Integer.parseInt(txtPort.getText()));
 			}
 		});
 		contentPane.setLayout(null);

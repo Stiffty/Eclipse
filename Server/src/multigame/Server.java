@@ -13,10 +13,11 @@ import javax.swing.ListModel;
 public class Server {
 
 	private ServerSocket server;
+	private Game_server game;
 	
-	List<Socket> clients = new ArrayList<Socket>();
+	private List<Socket> clients = new ArrayList<Socket>();
 	
-	public Server(int port,JPanel contentPane ) {
+	public Server(int port ) {
 		// TODO Auto-generated constructor stub
 		
 		try {
@@ -24,10 +25,14 @@ public class Server {
 			
 			while(true) {
 				Socket client = server.accept();
+				System.out.println("Connected"+client.getInetAddress());
 				clients.add(client);
-				JList list = new JList();
-				list.setBounds(15, 81, 283, 174);
-				contentPane.add(list);
+				if(clients.size()%2 == 0) {
+					
+					new Thread(() -> {
+						game = new Game_server(clients.get(clients.size()-1),clients.get(clients.size()-2));
+					}).start();
+				}
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
