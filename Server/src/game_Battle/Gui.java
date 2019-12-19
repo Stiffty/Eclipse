@@ -12,6 +12,10 @@ import java.awt.event.KeyEvent;
 
 public class Gui extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Controller con;
 
@@ -36,16 +40,11 @@ public class Gui extends JFrame {
 	 * Create the frame.
 	 */
 	public Gui() {
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(null);
 		contentPane = new JPanel();
-		contentPane.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				
-			}
-		});
+		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		start_Controller();
 		setContentPane(contentPane);
@@ -59,13 +58,8 @@ public class Gui extends JFrame {
 	 void start_Controller() {
 			new Thread(() -> {
 				con = new Controller(this);
-				
 			}).start();
 		}
-
-	public JPanel getContentPane() {
-		return contentPane;
-	}
 
 	public void setContentPane(JPanel contentPane) {
 		this.contentPane = contentPane;
