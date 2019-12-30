@@ -3,6 +3,7 @@ package sort2;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.math.BigInteger;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,6 +15,8 @@ public class Frame extends JFrame {
 	private JPanel contentPane;
 	private static Draw draw = new Draw(feld);
 	private static Sort sort = new Sort(draw);
+	
+	static Long counter = (long) 0;
 	/**
 	 * Launch the application.
 	 */
@@ -39,7 +42,7 @@ public class Frame extends JFrame {
 	 */
 	public Frame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, feld.length+30, (int)(feld.length/2)+50);
+		setBounds(100, 100, feld.length/(feld.length/1000)+30, (int)feld.length/(feld.length/300)+50);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -76,10 +79,15 @@ public class Frame extends JFrame {
 			sleep();
 			sort.mergeSort(feld, 0, feld.length-1);
 			sleep();
+			sort.mischen(feld);
+			sleep();
+			sort.heapsort(feld);;
+			sleep();
 			}
 		} ).start();
 	}
 	static void sleep() {
+		counter = (long) 0;
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {

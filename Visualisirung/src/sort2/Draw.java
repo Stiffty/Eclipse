@@ -18,9 +18,12 @@ public class Draw extends JPanel{
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, super.getWidth(), super.getHeight());
+		
+		g.setColor(Color.WHITE);
+		g.drawString("Array accesses: " + Frame.counter, 10, 10);
+		g.drawString("Sleep Time: " + (1000000000/feld.length) + " ns",10,25);
 		int x = 0;
-		int y = 10;
-		for (int i = 0; i < feld.length; i+=5) {
+		for (int i = 0; i < feld.length; i+=1) {
 			
 			try {
 				double ifinal = ((feld[i]*(1D/feld.length)*Math.PI*2));
@@ -36,7 +39,11 @@ public class Draw extends JPanel{
 			}
 			
 			//g.setColor(Color.BLACK);
-			g.fillRect((x+i), feld.length/2-(feld[i]/2), 5, feld[i]/2);
+			int y = feld.length/(feld.length/300)-(feld[i]/(feld.length/300));
+			int higth = ((feld[i])/(feld.length/300));
+			int with = 1;
+			g.fillRect((x+i)/(feld.length/1000), y, with , higth);
+		
 		}
 	}
 	public void rePaint() {
