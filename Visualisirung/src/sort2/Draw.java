@@ -20,9 +20,9 @@ public class Draw extends JPanel{
 		g.fillRect(0, 0, super.getWidth(), super.getHeight());
 		
 		g.setColor(Color.WHITE);
-		g.drawString("Array accesses: " + Frame.counter, 10, 10);
-		g.drawString("Sleep Time: " + (1000000000/feld.length) + " ns",10,25);
-		int x = 0;
+		g.drawString("Array accesses: " + Frame.counter, feld.length, 10);
+		g.drawString("Sleep Time: " + (1000000000/feld.length) + " ns",feld.length,25);
+		int x = feld.length;
 		for (int i = 0; i < feld.length; i+=1) {
 			
 			try {
@@ -40,9 +40,10 @@ public class Draw extends JPanel{
 			
 			//g.setColor(Color.BLACK);
 			int y = feld.length/(feld.length/300)-(feld[i]/(feld.length/300));
-			int higth = ((feld[i])/(feld.length/300));
+			int higth = ((feld[i])/(feld.length/300)*2);
 			int with = 1;
 			g.fillRect((x+i)/(feld.length/1000), y, with , higth);
+			g.fillRect((x-i)/(feld.length/1000), y, with , higth);
 		
 		}
 	}

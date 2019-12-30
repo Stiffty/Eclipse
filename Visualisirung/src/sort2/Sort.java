@@ -1,5 +1,6 @@
 package sort2;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Sort {
@@ -27,7 +28,7 @@ public class Sort {
 				feld[r] = feld[i];
 				feld[i] = s;
 				draw.rePaint();
-				sleepfor(1000000000/feld.length);
+				sleepfor(1000000000/(feld.length));
 			}
 		
 	}
@@ -42,9 +43,10 @@ public class Sort {
 						zusortieren[j+1]=temp;
 						Frame.counter+=1;
 					}
+					
 				}
 				draw.rePaint();
-				sleepfor(1000000000/zusortieren.length);
+				sleepfor((1000000000)/(zusortieren.length/4));
 			}
 		
 	}
@@ -61,7 +63,7 @@ public class Sort {
 			}
 			sortieren[j] = temp;
 			draw.rePaint();
-			sleepfor(1000000000/sortieren.length);
+			sleepfor((1000000000)/(sortieren.length/4));
 		}
 		
 	}
@@ -91,9 +93,8 @@ public class Sort {
                 Frame.counter+=1;
             }
             draw.rePaint();
-    		sleepfor(1000000000/arr.length);
+    		sleepfor((100000000)/(arr.length/4));
         }
-       
         int temp = arr[start];
         arr[start] = pivot;
         arr[end] = temp;
@@ -143,7 +144,7 @@ public class Sort {
             for (int i = 0; i < n; i++) {
                 a[i] = aux[i];
             draw.rePaint();
-    		sleepfor(2000000000/a.length);
+            sleepfor((100000000)/(a.length/4));
             }
         }
     }
@@ -177,7 +178,7 @@ public class Sort {
                 arr[pos] = temp; 
                 writes++; 
                 draw.rePaint();
-        		sleepfor(2000000000/arr.length);
+                sleepfor((100000000)/(arr.length/4));
             } 
   
             while (pos != cycle_start) 
@@ -198,7 +199,7 @@ public class Sort {
                     arr[pos] = temp; 
                     writes++; 
                     draw.rePaint();
-            		sleepfor(2000000000/arr.length);
+                    sleepfor((100000000)/(arr.length/4));
                 } 
             } 
         } 
@@ -235,7 +236,7 @@ public class Sort {
             } 
             k++; 
             draw.rePaint();
-    		sleepfor(2000000000/arr.length);
+            sleepfor((100000000)/(arr.length/4));
         } 
       
         while (i < n1) 
@@ -311,13 +312,285 @@ public class Sort {
             arr[i] = arr[largest]; 
             arr[largest] = swap; 
             draw.rePaint();
-    		sleepfor(200000000/arr.length);
+            sleepfor((100000000)/(arr.length/4));
             // Recursively heapify the affected sub-tree 
             heapify(arr, n, largest); 
         } 
         
     } 
+    
+    void Selectionsort(int arr[]) 
+    { 
+        int n = arr.length; 
+  
+        // One by one move boundary of unsorted subarray 
+        for (int i = 0; i < n-1; i++) 
+        { 
+            // Find the minimum element in unsorted array 
+            int min_idx = i; 
+            for (int j = i+1; j < n; j++) 
+                if (arr[j] < arr[min_idx]) 
+                    min_idx = j; 
+  
+            // Swap the found minimum element with the first 
+            // element 
+            int temp = arr[min_idx]; 
+            arr[min_idx] = arr[i]; 
+            arr[i] = temp; 
+            draw.rePaint();
+            sleepfor((100000000)/(arr.length/4));
+        } 
+    } 
 	
+    public void radixsort(int arr[], int n) 
+    { 
+        // Find the maximum number to know number of digits 
+        int m = getMax(arr, n); 
+  
+        // Do counting sort for every digit. Note that instead 
+        // of passing digit number, exp is passed. exp is 10^i 
+        // where i is current digit number 
+        for (int exp = 1; m/exp > 0; exp *= 10) 
+            countSort(arr, n, exp); 
+    } 
+     int getMax(int arr[], int n) 
+    { 
+        int mx = arr[0]; 
+        for (int i = 1; i < n; i++) 
+            if (arr[i] > mx) 
+                mx = arr[i]; 
+        return mx; 
+    } 
+  
+    // A function to do counting sort of arr[] according to 
+    // the digit represented by exp. 
+     void countSort(int arr[], int n, int exp) 
+    { 
+        int output[] = new int[n]; // output array 
+        int i; 
+        int count[] = new int[10]; 
+        Arrays.fill(count,0); 
+  
+        // Store count of occurrences in count[] 
+        for (i = 0; i < n; i++) 
+            count[ (arr[i]/exp)%10 ]++; 
+  
+        // Change count[i] so that count[i] now contains 
+        // actual position of this digit in output[] 
+        for (i = 1; i < 10; i++) 
+            count[i] += count[i - 1]; 
+  
+        // Build the output array 
+        for (i = n - 1; i >= 0; i--) 
+        { 
+            output[count[ (arr[i]/exp)%10 ] - 1] = arr[i]; 
+            count[ (arr[i]/exp)%10 ]--; 
+            draw.rePaint();
+            sleepfor((100000000)/(arr.length/4));
+        } 
+  
+        // Copy the output array to arr[], so that arr[] now 
+        // contains sorted numbers according to curent digit 
+        for (i = 0; i < n; i++) {
+            arr[i] = output[i]; 
+            draw.rePaint();
+            sleepfor((100000000)/(arr.length/4));
+        }
+    } 
+     
+     int Shellsort(int arr[]) 
+     { 
+         int n = arr.length; 
+   
+         // Start with a big gap, then reduce the gap 
+         for (int gap = n/2; gap > 0; gap /= 2) 
+         { 
+             // Do a gapped insertion sort for this gap size. 
+             // The first gap elements a[0..gap-1] are already 
+             // in gapped order keep adding one more element 
+             // until the entire array is gap sorted 
+             for (int i = gap; i < n; i += 1) 
+             { 
+                 // add a[i] to the elements that have been gap 
+                 // sorted save a[i] in temp and make a hole at 
+                 // position i 
+                 int temp = arr[i]; 
+   
+                 // shift earlier gap-sorted elements up until 
+                 // the correct location for a[i] is found 
+                 int j; 
+                 for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
+                     arr[j] = arr[j - gap]; 
+                     draw.rePaint();
+                     sleepfor((100000000)/(arr.length/4));
+                 }
+                 // put temp (the original a[i]) in its correct 
+                 // location 
+                 arr[j] = temp; 
+                 draw.rePaint();
+                 sleepfor((100000000)/(arr.length/4));
+             } 
+         } 
+         return 0; 
+     } 
+     
+
+     static int RUN = 32; 
+     
+     // this function sorts array from left index to  
+     // to right index which is of size atmost RUN  
+     public void insertionSort(int[] arr, int left, int right)  
+     { 
+         for (int i = left + 1; i <= right; i++)  
+         { 
+             int temp = arr[i]; 
+             int j = i - 1; 
+             while (arr[j] > temp && j >= left) 
+             { 
+                 arr[j + 1] = arr[j]; 
+                 j--; 
+             } 
+             arr[j + 1] = temp; 
+         } 
+     } 
+   
+     // merge function merges the sorted runs  
+     public void mergeS(int[] arr, int l,  
+                                 int m, int r) 
+     { 
+         // original array is broken in two parts  
+         // left and right array  
+         int len1 = m - l + 1, len2 = r - m; 
+         int[] left = new int[len1]; 
+         int[] right = new int[len2]; 
+         for (int x = 0; x < len1; x++)  
+         { 
+             left[x] = arr[l + x]; 
+         } 
+         for (int x = 0; x < len2; x++)  
+         { 
+             right[x] = arr[m + 1 + x]; 
+         } 
+   
+         int i = 0; 
+         int j = 0; 
+         int k = l; 
+   
+         // after comparing, we merge those two array  
+         // in larger sub array  
+         while (i < len1 && j < len2)  
+         { 
+             if (left[i] <= right[j])  
+             { 
+                 arr[k] = left[i]; 
+                 i++; 
+             } 
+             else 
+             { 
+                 arr[k] = right[j]; 
+                 j++; 
+             } 
+             k++; 
+         } 
+   
+         // copy remaining elements of left, if any  
+         while (i < len1) 
+         { 
+             arr[k] = left[i]; 
+             k++; 
+             i++; 
+         } 
+   
+         // copy remaining element of right, if any  
+         while (j < len2)  
+         { 
+             arr[k] = right[j]; 
+             k++; 
+             j++; 
+         } 
+     } 
+   
+     // iterative Timsort function to sort the  
+     // array[0...n-1] (similar to merge sort)  
+     public void timSort(int[] arr, int n)  
+     { 
+           
+         // Sort individual subarrays of size RUN  
+         for (int i = 0; i < n; i += RUN)  
+         { 
+             insertionSort(arr, i, Math.min((i + 31), (n - 1))); 
+         } 
+   
+         // start merging from size RUN (or 32). It will merge  
+         // to form size 64, then 128, 256 and so on ....  
+         for (int size = RUN; size < n; size = 2 * size)  
+         { 
+               
+             // pick starting point of left sub array. We  
+             // are going to merge arr[left..left+size-1]  
+             // and arr[left+size, left+2*size-1]  
+             // After every merge, we increase left by 2*size  
+             for (int left = 0; left < n; left += 2 * size)  
+             { 
+                   
+                 // find ending point of left sub array  
+                 // mid+1 is starting point of right sub array  
+                 int mid = left + size - 1; 
+                 int right = Math.min((left + 2 * size - 1), (n - 1)); 
+   
+                 // merge sub array arr[left.....mid] &  
+                 // arr[mid+1....right]  
+                 mergeS(arr, left, mid, right); 
+             } 
+         } 
+     } 
+     
+     private final static boolean ASCENDING=true, DESCENDING=false;
+     private int[] a;
+     
+     public void sortbio(int[] a)
+     {
+    	 this.a=a;
+         bitonicSort(0, a.length, ASCENDING);
+     }
+
+     private void bitonicSort(int lo, int n, boolean dir)
+     {
+         if (n>1)
+         {
+             int m=n/2;
+             bitonicSort(lo, m, ASCENDING);
+             bitonicSort(lo+m, m, DESCENDING);
+             bitonicMerge(lo, n, dir);
+         }
+     }
+
+     private void bitonicMerge(int lo, int n, boolean dir)
+     {
+         if (n>1)
+         {
+             int m=n/2;
+             for (int i=lo; i<lo+m; i++)
+                 compare(i, i+m, dir);
+             bitonicMerge(lo, m, dir);
+             bitonicMerge(lo+m, m, dir);
+         }
+     }
+
+     private void compare(int i, int j, boolean dir)
+     {
+         if (dir==(a[i]>a[j]))
+             exchange(i, j);
+     }
+
+     private void exchange(int i, int j)
+     {
+         int t=a[i];
+         a[i]=a[j];
+         a[j]=t;
+         draw.rePaint();
+         sleepfor((100000000)/(a.length/4));
+     }
 	public void sleepfor(long nanosec) {
 		long timeElapse;
 		final long starttime = System.nanoTime();
