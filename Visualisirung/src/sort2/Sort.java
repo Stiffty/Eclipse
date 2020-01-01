@@ -27,10 +27,26 @@ public class Sort {
 				s = feld[r];
 				feld[r] = feld[i];
 				feld[i] = s;
-				draw.rePaint();
+				//12345
 				sleepfor(1000000000/(feld.length));
 			}
 		
+	}
+	
+	public void reverse(int[] feld) {
+		int safe;
+		for (int i = 0; i < (feld.length/2)-1; i++) {
+			safe = feld[i];
+			feld[i] = feld[(feld.length-i)-1];
+			feld[(feld.length-i)-1] = safe;
+			//12345
+			sleepfor((1000000000/(feld.length))*2);
+		}
+	}
+	
+	public void tunnel(int[] feld) {
+		//12345
+		sleepfor((1000000000/(feld.length)));
 	}
 	
 	public void bubblesort(int[] zusortieren) {
@@ -45,7 +61,7 @@ public class Sort {
 					}
 					
 				}
-				draw.rePaint();
+				//12345
 				sleepfor((1000000000)/(zusortieren.length/4));
 			}
 		
@@ -62,7 +78,7 @@ public class Sort {
 				Frame.counter+=1;
 			}
 			sortieren[j] = temp;
-			draw.rePaint();
+			//12345
 			sleepfor((1000000000)/(sortieren.length/4));
 		}
 		
@@ -92,13 +108,13 @@ public class Sort {
                 start++;
                 Frame.counter+=1;
             }
-            draw.rePaint();
-    		sleepfor((100000000)/(arr.length/4));
         }
+     
         int temp = arr[start];
         arr[start] = pivot;
         arr[end] = temp;
- 
+        //12345
+		sleepfor((100000000)/(arr.length*4));
         return start;
     }
 	
@@ -143,7 +159,7 @@ public class Sort {
 
             for (int i = 0; i < n; i++) {
                 a[i] = aux[i];
-            draw.rePaint();
+            //12345
             sleepfor((100000000)/(a.length/4));
             }
         }
@@ -177,7 +193,7 @@ public class Sort {
                 item = arr[pos]; 
                 arr[pos] = temp; 
                 writes++; 
-                draw.rePaint();
+                //12345
                 sleepfor((100000000)/(arr.length/4));
             } 
   
@@ -198,7 +214,7 @@ public class Sort {
                     item = arr[pos]; 
                     arr[pos] = temp; 
                     writes++; 
-                    draw.rePaint();
+                    //12345
                     sleepfor((100000000)/(arr.length/4));
                 } 
             } 
@@ -235,7 +251,7 @@ public class Sort {
                 j++; 
             } 
             k++; 
-            draw.rePaint();
+            //12345
             sleepfor((100000000)/(arr.length/4));
         } 
       
@@ -311,7 +327,7 @@ public class Sort {
             int swap = arr[i]; 
             arr[i] = arr[largest]; 
             arr[largest] = swap; 
-            draw.rePaint();
+            //12345
             sleepfor((100000000)/(arr.length/4));
             // Recursively heapify the affected sub-tree 
             heapify(arr, n, largest); 
@@ -337,7 +353,7 @@ public class Sort {
             int temp = arr[min_idx]; 
             arr[min_idx] = arr[i]; 
             arr[i] = temp; 
-            draw.rePaint();
+            //12345
             sleepfor((100000000)/(arr.length/4));
         } 
     } 
@@ -362,8 +378,7 @@ public class Sort {
         return mx; 
     } 
   
-    // A function to do counting sort of arr[] according to 
-    // the digit represented by exp. 
+    
      void countSort(int arr[], int n, int exp) 
     { 
         int output[] = new int[n]; // output array 
@@ -385,7 +400,7 @@ public class Sort {
         { 
             output[count[ (arr[i]/exp)%10 ] - 1] = arr[i]; 
             count[ (arr[i]/exp)%10 ]--; 
-            draw.rePaint();
+            //12345
             sleepfor((100000000)/(arr.length/4));
         } 
   
@@ -393,7 +408,7 @@ public class Sort {
         // contains sorted numbers according to curent digit 
         for (i = 0; i < n; i++) {
             arr[i] = output[i]; 
-            draw.rePaint();
+            //12345
             sleepfor((100000000)/(arr.length/4));
         }
     } 
@@ -421,13 +436,13 @@ public class Sort {
                  int j; 
                  for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
                      arr[j] = arr[j - gap]; 
-                     draw.rePaint();
+                     //12345
                      sleepfor((100000000)/(arr.length/4));
                  }
                  // put temp (the original a[i]) in its correct 
                  // location 
                  arr[j] = temp; 
-                 draw.rePaint();
+                 //12345
                  sleepfor((100000000)/(arr.length/4));
              } 
          } 
@@ -437,8 +452,7 @@ public class Sort {
 
      static int RUN = 32; 
      
-     // this function sorts array from left index to  
-     // to right index which is of size atmost RUN  
+    
      public void insertionSort(int[] arr, int left, int right)  
      { 
          for (int i = left + 1; i <= right; i++)  
@@ -454,7 +468,7 @@ public class Sort {
          } 
      } 
    
-     // merge function merges the sorted runs  
+     
      public void mergeS(int[] arr, int l,  
                                  int m, int r) 
      { 
@@ -510,8 +524,7 @@ public class Sort {
          } 
      } 
    
-     // iterative Timsort function to sort the  
-     // array[0...n-1] (similar to merge sort)  
+     
      public void timSort(int[] arr, int n)  
      { 
            
@@ -584,13 +597,15 @@ public class Sort {
      }
 
      private void exchange(int i, int j)
+
      {
          int t=a[i];
          a[i]=a[j];
          a[j]=t;
-         draw.rePaint();
+         //12345
          sleepfor((100000000)/(a.length/4));
      }
+
 	public void sleepfor(long nanosec) {
 		long timeElapse;
 		final long starttime = System.nanoTime();

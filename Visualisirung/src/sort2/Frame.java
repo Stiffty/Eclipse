@@ -29,6 +29,18 @@ public class Frame extends JFrame {
 					frame.add(draw);
 					frame.setVisible(true);
 					//draw.repaint();
+					new Thread(()->{ 
+						while(true) {
+							draw.repaint();
+							try {
+								Thread.sleep(15);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						
+					}).start();
 					action();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,56 +67,70 @@ public class Frame extends JFrame {
 	static void action() {
 		new Thread(()->{ 
 			while(true) {
-//			sort.mischen(feld);
-//			sleep();
-//			sort.bubblesort(feld);
-//			sleep();
-//			sort.mischen(feld);
-//			sleep();
-//			sort.insertionSort(feld);
-//			sleep();
-//			sort.mischen(feld);
-//			sleep();
-//			sort.quickSort(feld, 0, feld.length-1);
-//			sleep();
-//			sort.mischen(feld);
-//			sleep();
-//			sort.LSD_sort(feld);
-//			sleep();
-//			sort.mischen(feld);
-//			sleep();
-//			sort.cycleSort(feld, feld.length);
-//			sleep();
-//			sort.mischen(feld);
-//			sleep();
-//			sort.mergeSort(feld, 0, feld.length-1);
-//			sleep();
-//			sort.mischen(feld);
-//			sleep();
-//			sort.heapsort(feld);;
-//			sleep();
-//			sort.mischen(feld);
-//			sleep();
-//			sort.Selectionsort(feld);
-//			sleep();
-//			sort.mischen(feld);
-//			sleep();
-//			sort.radixsort(feld,feld.length-1);
-//			sleep();
-//			sort.mischen(feld);
-//			sleep();
-//			sort.Shellsort(feld);
-//			sleep();
-			sort.mischen(feld);
 			sleep();
+			sort.bubblesort(feld);
+			sort.reverse(feld);
+			sort.bubblesort(feld);
+			
+			sleep();
+			sort.insertionSort(feld);
+			sort.reverse(feld);
+			sort.insertionSort(feld);
+			
+			sleep();
+			sort.quickSort(feld, 0, feld.length-1);
+			sort.reverse(feld);
+			sort.quickSort(feld, 0, feld.length-1);
+			sleep();
+			
+			sort.LSD_sort(feld);
+			sort.reverse(feld);
+			sort.LSD_sort(feld);
+			sleep();
+			
+			sort.cycleSort(feld, feld.length);
+			sort.reverse(feld);
+			sort.cycleSort(feld, feld.length);
+			sleep();
+			
+			sort.mergeSort(feld, 0, feld.length-1);
+			sort.reverse(feld);
+			sort.mergeSort(feld, 0, feld.length-1);
+			sleep();
+		
+			sort.heapsort(feld);
+			sort.reverse(feld);
+			sort.heapsort(feld);
+			sleep();
+			
+			sort.Selectionsort(feld);
+			sort.reverse(feld);
+			sort.Selectionsort(feld);
+			sleep();
+			
+			sort.radixsort(feld,feld.length-1);
+			sort.reverse(feld);
+			sort.radixsort(feld,feld.length-1);
+			sleep();
+			
+			sort.Shellsort(feld);
+			sort.reverse(feld);
+			sort.Shellsort(feld);
+			sleep();
+			
+			sort.sortbio(feld);
+			sort.reverse(feld);
 			sort.sortbio(feld);
 			sleep();
+			//sort.tunnel(feld);	
 			}
 		} ).start();
 	}
 	static void sleep() {
 		counter = (long) 0;
 		try {
+			Thread.sleep(1000);
+			sort.mischen(feld);
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
