@@ -45,7 +45,7 @@ public class Draw extends JPanel{
 		
 		g.setColor(Color.WHITE);
 		g.drawString("Array accesses: " + Frame.counter, this.getWidth()/2, 10);
-		g.drawString("Sleep Time: " + (1000000000/feld.length) + " ns",this.getWidth()/2,25);
+		g.drawString("Wait Time: " + Frame.waittime/1000000000 + " s",this.getWidth()/2,25);
 		g.drawString("FPS: " + fps,this.getWidth()/2,40);
 		
 		if(coloroffset ==feld.length) {
@@ -76,10 +76,11 @@ public class Draw extends JPanel{
 			int higth = ((feld[i])/(feld.length/300)*2);
 			int with = 1;
 			
-			
-				g.fillRect((x+i)/(feld.length/1_000), y, with , higth);
-				g.fillRect((x-i)/(feld.length/1000), y, with , higth);
-				besetzt[((0+i)/(feld.length/1000))] = true;
+			g.fill3DRect((x+i)/(feld.length/1_000), y, with , higth,true);
+			//g.fillRect((x+i)/(feld.length/1_000), y, with , higth);
+			//g.fillRect((x-i)/(feld.length/1000), y, with , higth);
+			g.fill3DRect((x-i)/(feld.length/1000), y, with , higth,true);
+			besetzt[((0+i)/(feld.length/1000))] = true;
 			
 		}
 		}

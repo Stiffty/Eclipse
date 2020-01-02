@@ -13,10 +13,12 @@ public class Frame extends JFrame {
 
 	private static int[] feld = new int[1000];
 	private JPanel contentPane;
+	
 	private static Draw draw = new Draw(feld);
 	private static Sort sort = new Sort(draw);
 	
-	static Long counter = (long) 0;
+	static long counter = 0;
+	static long waittime = 0;
 	/**
 	 * Launch the application.
 	 */
@@ -119,15 +121,49 @@ public class Frame extends JFrame {
 			sleep();
 			
 			sort.sortbio(feld);
+			sort.Selectionsort(feld);
 			sort.reverse(feld);
 			sort.sortbio(feld);
+			sort.Selectionsort(feld);
 			sleep();
+			
+			sort.Combsort(feld);;
+			sort.reverse(feld);
+		    sort.Combsort(feld);
+			sleep();
+			
+			sort.pigeonhole_sort(feld, feld.length-1);
+			sort.reverse(feld);
+			sort.pigeonhole_sort(feld, feld.length-1);
+			sleep();
+			
+			sort.cocktailSort(feld);
+			sort.reverse(feld);
+			sort.cocktailSort(feld);
+			sleep();
+			
+			sort.pancakeSort(feld, feld.length-1);
+			sort.reverse(feld);
+			sort.pancakeSort(feld, feld.length-1);
+			sleep();
+			
+			sort.binarysort(feld);
+			sort.reverse(feld);
+			sort.binarysort(feld);
+			sleep();
+			
+			sort.oddEvenSort(feld, feld.length-1);
+			sort.reverse(feld);
+			sort.oddEvenSort(feld, feld.length-1);
+			sleep();
+			
 			//sort.tunnel(feld);	
 			}
 		} ).start();
 	}
 	static void sleep() {
 		counter = (long) 0;
+		waittime = 0;
 		try {
 			Thread.sleep(1000);
 			sort.mischen(feld);
