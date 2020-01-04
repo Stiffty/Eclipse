@@ -51,9 +51,7 @@ public class Frame extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public Frame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, (feld.length/(feld.length/1000)*2)+30, (int)(feld.length/(feld.length/300)*2)+50);
