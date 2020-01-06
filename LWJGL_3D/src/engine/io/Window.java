@@ -6,10 +6,10 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.*;
 
-public class Window {
+public class Window{
 
-	private int heigth;
-	private int width;
+	public static int heigth;
+	public static int width;
 	private String titel;
 	private boolean isFullscreen;
 	
@@ -34,16 +34,18 @@ public class Window {
 		window = GLFW.glfwCreateWindow(heigth, width, titel, isFullscreen?GLFW.glfwGetPrimaryMonitor():0, 0);
 
 		GLFWVidMode videoMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
-		GLFW.glfwSetWindowPos(window, (videoMode.width()-width) / 2, (videoMode.height()-heigth) / 2);
+		GLFW.glfwSetWindowPos(window, ((videoMode.width()) / 2)-(width/2), ((videoMode.height()) / 2)-(heigth/2));
 		GLFW.glfwMakeContextCurrent(window);
 		GL.createCapabilities();
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		
+		GL11.glViewport(0, 0, ((videoMode.width()) / 2)-(width/2), ((videoMode.height()) / 2)-(heigth/2));
 
 		callbacks();
 
 		GLFW.glfwShowWindow(window);
 
-		GLFW.glfwSwapInterval(0);
+		GLFW.glfwSwapInterval(1);
 	}
 	
 	void callbacks() {

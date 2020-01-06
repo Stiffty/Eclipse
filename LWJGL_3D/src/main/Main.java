@@ -5,10 +5,11 @@ import org.lwjgl.opengl.GL11;
 
 import engine.*;
 import engine.graphics.Mesh;
+import engine.io.Input;
 import engine.io.Window;
 import engine.maths.Vector3f;
 
-public class Main {
+public class Main{
 
 	private Window window;
 	
@@ -17,7 +18,7 @@ public class Main {
 	}
 	
 	void create_Window() {
-			window = new Window(1000,500,"test",false);
+			window = new Window(800,600,"test",false);
 			window.SetBackgroundColor(1, 0, 1);
 			window.Create();
 			init();
@@ -44,4 +45,5 @@ public class Main {
 	public void realease() {
 		
 	}
+	
 }

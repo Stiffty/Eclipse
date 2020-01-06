@@ -5,12 +5,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
+import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 
 public class GLSLProgram {
 
+	private static final float[] MATRIX_BUFFER = new float[16];
+	
 	private int program;
 
 	private HashMap<String, Integer> uniformvariables = new HashMap<>();
@@ -64,6 +67,13 @@ public class GLSLProgram {
 		}
 	}
 
+	public void setMatrix(String variable,Matrix4f matrix) {
+		if(uniformvariables.containsKey(variable)) {
+			enable();
+			int location = uniformvariables.get(variable);
+			GL20.glUniformMatrix4fv(location, false, matrix.get(MATRIX_BUFFER));
+		}
+	}
 	public void enable() {
 		GL20.glUseProgram(program);
 	}
@@ -92,7 +102,8 @@ public class GLSLProgram {
 			GL20.glShaderSource(id, builder);
 			GL20.glCompileShader(id);
 
-			if (GL20.glGetShaderi(id, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
+			if (GL20.glGetShaderi(id, GL20.GL_COMPILE_STATUS) != GL11.GL_TRUE) {
+				System.out.println("Shader Copmiling failed: " + GL20.glGetShaderInfoLog(id));
 				throw new RuntimeException("Shader Copmiling failed: " + GL20.glGetShaderInfoLog(id));
 			}
 			GL20.glAttachShader(program, id);
