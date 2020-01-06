@@ -5,17 +5,12 @@ import org.lwjgl.opengl.GL11;
 
 import engine.*;
 import engine.graphics.Mesh;
-import engine.graphics.Renderer;
-import engine.graphics.Vertex;
 import engine.io.Window;
 import engine.maths.Vector3f;
 
 public class Main {
 
 	private Window window;
-	
-	private Renderer renderer = new Renderer();
-	
 	
 	public Main() {
 		create_Window();
