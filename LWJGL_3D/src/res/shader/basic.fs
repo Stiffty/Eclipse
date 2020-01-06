@@ -1,9 +1,14 @@
 #version 150
 
+in vec3 outPositions;
+in vec2 outTextureCoordinates;
+
 out vec4 outputColor;
+
+uniform sampler2D diffuseTexture;
 
 void main(){
 	
-	outputColor = vec4(30,20,0,1);
+	outputColor = texture(diffuseTexture,outTextureCoordinates);
 	
 }

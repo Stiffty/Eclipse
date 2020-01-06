@@ -72,6 +72,20 @@ public class Mesh {
 		
 		isUsingIndexBuffer = true;
 	}
+	
+	public void createWithindexAndTextures(int[] indeces,float[] textureCoordinates) {
+		vao = GL30.glGenVertexArrays();
+		GL30.glBindVertexArray(vao);
+		
+		indexBufferVbo = attachIndexBuffer(indeces);
+		int positionVBO = addStaticAttribute(0, positions, 3);
+		int textureCoordsVBO = addStaticAttribute(1, textureCoordinates, 2);
+		
+		vbos = new int[] {positionVBO,textureCoordsVBO};
+		vertexCount = indeces.length;
+		
+		isUsingIndexBuffer = true;
+	}
 	public void render() {
 		GL30.glBindVertexArray(vao);
 		
