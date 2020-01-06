@@ -12,61 +12,110 @@ import org.lwjgl.system.MemoryUtil;
 
 public class Mesh {
 
-	private Vertex[] vertices;
-	private int[] indices;
-	private int vao,pbo,ibo;
+	private float[] positions;
 	
-	public Mesh(Vertex[] vertices, int[] indices) {
+	private int vao,ibo;
+	private int[] vbos;
+	private int vertexCount;
+	
+	private boolean isUsingIndexBuffer;
+	private int indexBufferVbo;
+	
+	public Mesh(float[] positions) {
 		super();
-		this.vertices = vertices;
-		this.indices = indices;
+		this.positions = positions;
 	}
 	
 	public void create() {
 		vao = GL30.glGenVertexArrays();
 		GL30.glBindVertexArray(vao);
 		
-		FloatBuffer positionbuffer = MemoryUtil.memAllocFloat(vertices.length*3);
-		float[] positiondata = new float[vertices.length*3];
-		for (int i = 0; i < vertices.length; i++) {
-			positiondata[i*3] = vertices[i].getPosition().getX();
-			positiondata[i*3 + 1] = vertices[i].getPosition().getY();
-			positiondata[i*3 + 2] = vertices[i].getPosition().getZ();
+		int positionVBO = addStaticAttribute(0, positions, 3);
+		
+		vbos = new int[] {positionVBO};
+		vertexCount = positions.length/3;
+//		FloatBuffer positionbuffer = MemoryUtil.memAllocFloat(vertices.length*3);
+//		float[] positiondata = new float[vertices.length*3];
+//		for (int i = 0; i < vertices.length; i++) {
+//			positiondata[i*3] = vertices[i].getPosition().getX();
+//			positiondata[i*3 + 1] = vertices[i].getPosition().getY();
+//			positiondata[i*3 + 2] = vertices[i].getPosition().getZ();
+//		}
+//		
+//		positionbuffer.put(positiondata).flip();
+//		
+//		vbo = GL15.glGenBuffers();
+//		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vbo);
+//		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, positionbuffer, GL15.GL_STATIC_DRAW);
+//		GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
+//		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+//		
+//		IntBuffer indicesbuffer = MemoryUtil.memAllocInt(indices.length);
+//		indicesbuffer.put(indices).flip();
+//		
+//		ibo = GL15.glGenBuffers();
+//		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, ibo);
+//		GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesbuffer, GL15.GL_STATIC_DRAW);
+//		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
+		
+	}
+
+	public void createWithindex(int[] indeces) {
+		vao = GL30.glGenVertexArrays();
+		GL30.glBindVertexArray(vao);
+		
+		indexBufferVbo = attachIndexBuffer(indeces);
+		int positionVBO = addStaticAttribute(0, positions, 3);
+		
+		vbos = new int[] {positionVBO};
+		vertexCount = indeces.length;
+		
+		isUsingIndexBuffer = true;
+	}
+	public void render() {
+		GL30.glBindVertexArray(vao);
+		
+		for (int i = 0; i < vbos.length; i++) {
+			GL20.glEnableVertexAttribArray(i);
 		}
 		
-		positionbuffer.put(positiondata).flip();
+		if(isUsingIndexBuffer) {
+			GL11.glDrawElements(GL11.GL_TRIANGLES, vertexCount, GL11.GL_UNSIGNED_INT,0);
+		}else {
+			GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, vertexCount);
+		}
 		
-		pbo = GL15.glGenBuffers();
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, pbo);
-		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, positionbuffer, GL15.GL_STATIC_DRAW);
-		GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
+		for (int i = 0; i < vbos.length; i++) {
+			GL20.glDisableVertexAttribArray(i);
+		}
+	}
+	
+	public void release() {
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
-		
-		IntBuffer indicesbuffer = MemoryUtil.memAllocInt(indices.length);
-		indicesbuffer.put(indices).flip();
-		
-		ibo = GL15.glGenBuffers();
-		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, ibo);
-		GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesbuffer, GL15.GL_STATIC_DRAW);
-		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
-		
+		GL30.glDeleteVertexArrays(vao);
+		for(int id: vbos) {
+			GL15.glDeleteBuffers(id);
+		}
+		if(isUsingIndexBuffer) {
+			GL15.glDeleteBuffers(indexBufferVbo);
+		}
 	}
-
-	public Vertex[] getVertices() {
-		return vertices;
+	
+	int addStaticAttribute(int index,float[] data,int dataSize) {
+		int vbo = GL15.glGenBuffers();
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vbo);
+		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, data, GL15.GL_STATIC_DRAW);
+		GL20.glVertexAttribPointer(index, dataSize, GL11.GL_FLOAT, false, 0, 0);
+		return vbo;
 	}
-
-	public void setVertices(Vertex[] vertices) {
-		this.vertices = vertices;
+	
+	private int attachIndexBuffer(int[] indeces) {
+		int vbo = GL15.glGenBuffers();
+		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, vbo);		
+		GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indeces, GL15.GL_STATIC_DRAW);
+		return vbo;
 	}
-
-	public int[] getIndices() {
-		return indices;
-	}
-
-	public void setIndices(int[] indices) {
-		this.indices = indices;
-	}
+	
 
 	public int getVao() {
 		return vao;
@@ -76,13 +125,6 @@ public class Mesh {
 		this.vao = vao;
 	}
 
-	public int getPbo() {
-		return pbo;
-	}
-
-	public void setPbo(int pbo) {
-		this.pbo = pbo;
-	}
 
 	public int getIbo() {
 		return ibo;

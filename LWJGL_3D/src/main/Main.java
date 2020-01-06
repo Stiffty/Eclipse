@@ -1,6 +1,7 @@
 package main;
 
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL11;
 
 import engine.*;
 import engine.graphics.Mesh;
@@ -14,40 +15,38 @@ public class Main {
 	private Window window;
 	
 	private Renderer renderer = new Renderer();
-	private Mesh mesh = new Mesh(new Vertex[] {
-			new Vertex(new Vector3f(-0.5f,0.5f,0.0f)),
-			new Vertex(new Vector3f(0.5f,0.5f,0.0f)),
-			new Vertex(new Vector3f(0.5f,-0.5f,0.0f)),
-			new Vertex(new Vector3f(-0.5f,-0.5f,0.0f))
-	},new int[] {
-		0, 1, 2,
-		0, 3, 2
-	});
+	
 	
 	public Main() {
 		create_Window();
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Main m = new Main();
-	}
-
-	
 	void create_Window() {
-		//new Thread(()->{ 
 			window = new Window(1000,500,"test",false);
-			window.SetBackgroundColor(0, 0, 0);
+			window.SetBackgroundColor(1, 0, 1);
 			window.Create();
-			mesh.create();
+			init();
 			while(!GLFW.glfwWindowShouldClose(Window.window)) {
 				refresh();
 			}
-		//}).start();
+			realease();
 	}
-	void refresh() {
-		window.update();
-		renderer.renderMesh(mesh);
+	public void refresh() {
+		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT);
+		render();
 		window.render();
+		window.update();
+	}
+	
+	public void init() {
+		
+	}
+	
+	public void render() {
+		
+	}
+	
+	public void realease() {
+		
 	}
 }

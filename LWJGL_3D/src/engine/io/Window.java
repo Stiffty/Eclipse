@@ -1,6 +1,7 @@
 package engine.io;
 
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.*;
@@ -27,6 +28,7 @@ public class Window {
 	}
 
 	public void Create() {
+		GLFWErrorCallback.createPrint(System.err).set();
 		GLFW.glfwInit();
 
 		window = GLFW.glfwCreateWindow(heigth, width, titel, isFullscreen?GLFW.glfwGetPrimaryMonitor():0, 0);
@@ -67,7 +69,7 @@ public class Window {
 		GL11.glViewport(0, 0, width, heigth);
 		GL11.glClearColor(backgroundColor[0], backgroundColor[1], backgroundColor[2], 1.0f);
 		//GL11.glClearColor(100f, 100f, 100f, 1f);
-		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT);
+		//GL11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT);
 		GLFW.glfwPollEvents();
 	}
 	public void render() {
