@@ -20,10 +20,32 @@ public class Input {
 
 	static GLFWCursorPosCallback mousepos = new GLFWCursorPosCallback() {
 
+		private double lastX = -1;
+		private double lastY = -1;
+		
+		private List<Integer> poses = new ArrayList<Integer>();
+		
 		@Override
 		public void invoke(long window, double x, double y) {
 			// TODO Auto-generated method stub
+			if(lastX == -1&&lastY == -1) {
+				lastX = x;
+				lastY = y;
+			}
+				
+			//System.out.println("(Debug) x: " + x +  " y: " + y);
 
+			if(lastX>x) {
+				poses.add(0);
+				callMousePos(0,poses);
+			}else if(lastX < x) {
+				poses.add(1);
+				callMousePos(1,poses);
+			}
+			
+			lastX = x;
+			lastY = y;
+			
 		}
 	};
 
@@ -38,10 +60,10 @@ public class Input {
 
 			if (action == 0) {
 				keys.remove(keys.indexOf(key));
-				Input.call(keys);
+				Input.callKey(keys);
 			} else if(action == 1){
 				keys.add(key);
-				Input.call(keys);
+				Input.callKey(keys);
 			}
 
 		}
@@ -56,8 +78,13 @@ public class Input {
 		}
 	};
 
-	public static void call(List<Integer> keys) {
+	public static void callKey(List<Integer> keys) {
 		g.movecall( keys);
+	}
+	
+	public static void callMousePos(int direction,List<Integer> poses) {
+		g.mouseCall(direction,poses);
+
 	}
 
 }

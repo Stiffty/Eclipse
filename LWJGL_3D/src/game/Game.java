@@ -26,13 +26,21 @@ public class Game extends Main {
 	private Texture testtexture;
 	private Entity cube;
 	private Camera camera;
-
+	
+	//Input
 	private Input input = new Input(this);
 	private static List<Integer> key = new ArrayList<Integer>();
+	private static List<Integer> poses = new ArrayList<Integer>();
+	
+	public static float mouseSpeed = 1.5f;
 	
 	private static float xOffsetCamera;
 	private static float zOffsetCamera;
+	
+	private static float yOffsetCameraRotation = 90f;
 
+	//Input end
+	
 	private float vertexshaderoffset = 0.5f;
 
 	public static void main(String[] args) {
@@ -90,6 +98,10 @@ public class Game extends Main {
 		camera.getPosition().x = xOffsetCamera;
 		camera.getPosition().z = zOffsetCamera;
 		
+		camera.getRotation().y = yOffsetCameraRotation;
+		
+		System.out.println(camera.getRotation().y);
+		
 		cube.update();
 		camera.update();
 
@@ -101,6 +113,7 @@ public class Game extends Main {
 
 		cube.getMesh().render();
 
+		poses.clear();
 //		basicShader.enable();
 //		basicShader.setVec3("offset", vertexshaderoffset, 0f, 0f);
 //		basicShader.setTexture("diffuseTexture", testtexture, 0);
@@ -125,6 +138,13 @@ public class Game extends Main {
 				
 				if(key.get(i) == GLFW.GLFW_KEY_W) {
 					xOffsetCamera+=0.1;
+					if(yOffsetCameraRotation>90) {
+						zOffsetCamera-=0.1/yOffsetCameraRotation;
+						System.out.println("1");
+					}else if(yOffsetCameraRotation<90) {
+						System.out.println("2");
+						zOffsetCamera+=0.1;
+					}
 				}
 				if(key.get(i) == GLFW.GLFW_KEY_S) {
 					xOffsetCamera-=0.1;
@@ -141,4 +161,26 @@ public class Game extends Main {
 		key = keyi;
 	}
 
+	public static void mouseCall(int direction,List<Integer> pose) {
+		poses = pose;
+		
+		if(yOffsetCameraRotation > 360||yOffsetCameraRotation<0 ) {
+			yOffsetCameraRotation = 0;
+		}
+		
+		for (int i = 0; i < pose.size(); i++) {
+			switch (pose.get(i)) {
+			case 0:
+				yOffsetCameraRotation-=mouseSpeed;
+				break;
+
+			case 1:
+				yOffsetCameraRotation+=mouseSpeed;
+				break;
+			default:
+				break;
+			}
+		}
+		
+	}
 }

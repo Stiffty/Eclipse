@@ -39,6 +39,8 @@ public class Window{
 		GL.createCapabilities();
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		
+		GLFW.glfwSetInputMode(window,GLFW.GLFW_CURSOR , GLFW.GLFW_CURSOR_DISABLED);
+		
 		GL11.glViewport(0, 0, ((videoMode.width()) / 2)-(width/2), ((videoMode.height()) / 2)-(heigth/2));
 
 		callbacks();
@@ -62,7 +64,7 @@ public class Window{
 		
 		GLFW.glfwSetWindowSizeCallback(window, windowSizeCallback);
 		GLFW.glfwSetKeyCallback(window, Input.key);
-		//GLFW.glfwSetCursorPosCallback(window, mousepos);
+		GLFW.glfwSetCursorPosCallback(window, Input.mousepos);
 	}
 	
 	
