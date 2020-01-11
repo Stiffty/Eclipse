@@ -8,15 +8,16 @@ import javax.swing.JPanel;
 
 public class Draw extends JPanel {
 
-	private Ant ant = new Ant();;
-	
+	private Ant ant;
+
 	private boolean viewNet = false;
-	
-	//private ArrayList<ArrayList<Integer>> feld = ant.;
+	private boolean scale = false;
+
+	// private ArrayList<ArrayList<Integer>> feld = ant.;
 
 	public Draw() {
 		// TODO Auto-generated constructor stub
-		
+		ant = new Ant();
 	}
 
 	public void paintComponent(Graphics g) {
@@ -30,42 +31,74 @@ public class Draw extends JPanel {
 				for (int y = 0; y < width; y++) {
 					if (y % ant.size == 0 || x % ant.size == 0) {
 						g.setColor(Color.GRAY);
-						g.fillRect(x,y,ant.size,ant.size);
+						g.fillRect(x, y, ant.size, ant.size);
 						g.setColor(Color.BLACK);
 						g.drawRect(x, y, 1, 1);
 					}
 				}
 
 			}
-		}else {
+		} else {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, width, heigth);
 		}
 
 		g.setColor(Color.BLUE);
-		
-		
-		
-		for (int x = 0; x < ant.feld.size(); x++) {
-			for (int y = 0; y < ant.feld.get(x).size(); y++) {
-				if(ant.feld.get(x).get(y)[2] == 1) {
-					g.setColor(Color.RED);
-					g.fillRect(ant.feld.get(x).get(y)[0], ant.feld.get(x).get(y)[1], ant.size, ant.size);
-				}else
-				if(ant.feld.get(x).get(y)[2] == 2) {
-					g.setColor(Color.WHITE);
-					g.fillRect(ant.feld.get(x).get(y)[0], ant.feld.get(x).get(y)[1], ant.size, ant.size);
-				}else
-				if(ant.feld.get(x).get(y)[2] == 3) {
-					g.setColor(Color.GREEN);
-					g.fillRect(ant.feld.get(x).get(y)[0], ant.feld.get(x).get(y)[1], ant.size, ant.size);
-				}else
-					if(ant.feld.get(x).get(y)[2] == 4) {
+
+		if (scale) {
+			for (int x = 0; x < ant.feld1.length; x++) {
+				for (int y = 0; y < ant.feld1.length; y++) {
+					if (ant.feld1[x][y] == 1) {
+						g.setColor(Color.RED);
+						g.fillRect((((x / 500)) + (width / 2)) * x / 500, (((y / 500)) + (heigth / 2)) * y / 500,
+								ant.size, ant.size);
+					} else if (ant.feld1[x][y] == 2) {
+						g.setColor(Color.WHITE);
+						g.fillRect((((x / 500)) + (width / 2)) * x / 500, (((y / 500)) + (heigth / 2)) * y / 500,
+								ant.size, ant.size);
+					} else if (ant.feld1[x][y] == 3) {
+						g.setColor(Color.GREEN);
+						g.fillRect((((x / 500)) + (width / 2)) * x / 500, (((y / 500)) + (heigth / 2)) * y / 500,
+								ant.size, ant.size);
+					} else if (ant.feld1[x][y] == 4) {
 						g.setColor(Color.YELLOW);
-						g.fillRect(ant.feld.get(x).get(y)[0], ant.feld.get(x).get(y)[1], ant.size, ant.size);
+						g.fillRect((((x / 500)) + (width / 2)) * x / 500, (((y / 500)) + (heigth / 2)) * y / 500,
+								ant.size, ant.size);
 					}
+				}
+			}
+		} else {
+			for (int x = 0; x < ant.feld1.length; x++) {
+				for (int y = 0; y < ant.feld1.length; y++) {
+					if (ant.feld1[x][y] == 1) {
+						g.setColor(Color.RED);
+						g.fillRect(x, y, ant.size, ant.size);
+					} else if (ant.feld1[x][y] == 2) {
+						g.setColor(Color.WHITE);
+						g.fillRect(x, y, ant.size, ant.size);
+					} else if (ant.feld1[x][y] == 3) {
+						g.setColor(Color.GREEN);
+						g.fillRect(x, y, ant.size, ant.size);
+					} else if (ant.feld1[x][y] == 4) {
+						g.setColor(Color.YELLOW);
+						g.fillRect(x, y, ant.size, ant.size);
+					} else if (ant.feld1[x][y] == 5) {
+						g.setColor(Color.BLUE);
+						g.fillRect(x, y, ant.size, ant.size);
+					}else if (ant.feld1[x][y] == 6) {
+						g.setColor(Color.CYAN);
+						g.fillRect(x, y, ant.size, ant.size);
+					}else if (ant.feld1[x][y] == 7) {
+						g.setColor(Color.PINK);
+						g.fillRect(x, y, ant.size, ant.size);
+					}else if (ant.feld1[x][y] == 8) {
+						g.setColor(Color.MAGENTA);
+						g.fillRect(x, y, ant.size, ant.size);
+					}
+
+				}
 			}
 		}
-	
+
 	}
 }

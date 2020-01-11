@@ -1,16 +1,21 @@
 package langtons_Ant;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Ant {
 
-	public int size = 10;
+	public int size = 1;
 
 	public ArrayList<ArrayList<int[]>> feld = new ArrayList<ArrayList<int[]>>();
+	public byte[][] feld1 = new byte[10000][10000];
 
+	private  int[] b = new int[8];
+	
 	public Ant() {
 		// TODO Auto-generated constructor stub
-		new Thread(()->{ 
+
+		new Thread(() -> {
 			run();
 		}).start();
 //		for (int x = 0; x < size0; x++) {
@@ -30,134 +35,174 @@ public class Ant {
 		int yp = 500;
 		int direction = 1;
 		int[] same = new int[2];
-		addFeld(xp, yp, 2);
+		boolean there = true;
+		// addFeld(xp, yp, 2);
+		Random rd = new Random();
+		
+		for (int i = 0; i < b.length; i++) {
+			b[i] = rd.nextInt(2);
+		}
+		
 		while (true) {
-			boolean there = false;
-			
-			for (int x = 0; x < feld.size(); x++) {
-				for (int y = 0; y < feld.get(x).size(); y++) {
-					if (feld.get(x).get(y)[0] == xp ) {
-						if(feld.get(x).get(y)[1] == yp) {
-							there = true;
-							same[0] = x;
-							same[1] = y;
-						}
-					
-					}
+
+//			for (int x = 0; x < feld.size(); x++) {
+//				for (int y = 0; y < feld.get(x).size(); y++) {
+//					if (feld.get(x).get(y)[0] == xp ) {
+//						if(feld.get(x).get(y)[1] == yp) {
+//							there = true;
+//							same[0] = x;
+//							same[1] = y;
+//						}
+//					
+//					}
+//				}
+//			}
+			if (feld1[xp][yp] == 2) {
+				// addFeld(xp, yp, 1);
+				feld1[xp][yp] = 1;
+
+				if(b[0] == 1) {
+					same = leftturn(direction, xp, yp);
+				}else {
+					same = rigthturn(direction, xp, yp);
 				}
+
+			} else if (feld1[xp][yp] == 1) {
+				feld1[xp][yp] = 3;
+
+				if(b[1] == 1) {
+					same = leftturn(direction, xp, yp);
+				}else {
+					same = rigthturn(direction, xp, yp);
+				}
+
+			} else if (feld1[xp][yp] == 3) {
+				feld1[xp][yp] = 4;
+
+				if(b[2] == 1) {
+					same = leftturn(direction, xp, yp);
+				}else {
+					same = rigthturn(direction, xp, yp);
+				}
+
+			} else if (feld1[xp][yp] == 4) {
+				feld1[xp][yp] = 5;
+
+				if(b[3] == 1) {
+					same = leftturn(direction, xp, yp);
+				}else {
+					same = rigthturn(direction, xp, yp);
+				}
+
+			} else if (feld1[xp][yp] == 5) {
+				feld1[xp][yp] = 6;
+
+				if(b[4] == 1) {
+					same = leftturn(direction, xp, yp);
+				}else {
+					same = rigthturn(direction, xp, yp);
+				}
+			} else if (feld1[xp][yp] == 6) {
+				feld1[xp][yp] = 7;
+
+				if(b[5] == 1) {
+					same = leftturn(direction, xp, yp);
+				}else {
+					same = rigthturn(direction, xp, yp);
+				}
+			} else if (feld1[xp][yp] == 7) {
+				feld1[xp][yp] = 8;
+
+				if(b[6] == 1) {
+					same = leftturn(direction, xp, yp);
+				}else {
+					same = rigthturn(direction, xp, yp);
+				}
+			}else if (feld1[xp][yp] == 8) {
+				feld1[xp][yp] = 2;
+
+				if(b[7] == 1) {
+					same = leftturn(direction, xp, yp);
+				}else {
+					same = rigthturn(direction, xp, yp);
+				}
+			}else {
+				// addFeld(xp, yp, 1);
+				feld1[xp][yp] = 1;
+
+				same = leftturn(direction, xp, yp);
+
 			}
-			if(there == false||feld.get(same[0]).get(same[1])[2] == 2) {
-				addFeld(xp, yp, 1);
-				
-				switch (direction) {
-				case 1:
-					xp-=size;
-					direction = 2;
-					break;
 
-				case 2:
-					yp+=size;
-					direction = 3;
-					break;
-				case 3:
-					xp+=size;
-					direction = 4;
-					break;
-				case 4:
-					yp-=size;
-					direction = 1;
-					break;
-				default:
-					break;
-				}
-				//System.out.println("0: "+direction);
-			}else if(feld.get(same[0]).get(same[1])[2] == 1) {
-				feld.get(same[0]).get(same[1])[2] = 3;
-				
-				switch (direction) {
-				case 1:
-					xp+=size;
-					direction = 4;
-					break;
-
-				case 2:
-					yp-=size;
-					direction = 1;
-					break;
-				case 3:
-					xp-=size;
-					direction = 2;
-					break;
-				case 4:
-					yp+=size;
-					direction = 3;
-					break;
-				default:
-					break;
-				}
-				//System.out.println("1: "+direction);
-			}else if(feld.get(same[0]).get(same[1])[2] == 3) {
-				feld.get(same[0]).get(same[1])[2] = 4;
-				
-				switch (direction) {
-				case 1:
-					xp+=size;
-					direction = 4;
-					break;
-
-				case 2:
-					yp-=size;
-					direction = 1;
-					break;
-				case 3:
-					xp-=size;
-					direction = 2;
-					break;
-				case 4:
-					yp+=size;
-					direction = 3;
-					break;
-				default:
-					break;
-				}
-			}else if(feld.get(same[0]).get(same[1])[2] == 4) {
-				feld.get(same[0]).get(same[1])[2] = 2;
-				
-				switch (direction) {
-				case 1:
-					xp+=size;
-					direction = 4;
-					break;
-
-				case 2:
-					yp-=size;
-					direction = 1;
-					break;
-				case 3:
-					xp-=size;
-					direction = 2;
-					break;
-				case 4:
-					yp+=size;
-					direction = 3;
-					break;
-				default:
-					break;
-				}
+			xp = same[0];
+			yp = same[1];
+			direction = same[2];
 			try {
 				Thread.sleep(0);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			}
 		}
+
+	}
+
+	int[] rigthturn(int direction, int xp, int yp) {
+		switch (direction) {
+		case 1:
+			xp += size;
+			direction = 4;
+			break;
+
+		case 2:
+			yp -= size;
+			direction = 1;
+			break;
+		case 3:
+			xp -= size;
+			direction = 2;
+			break;
+		case 4:
+			yp += size;
+			direction = 3;
+			break;
+		default:
+			break;
+		}
+		int[] data = { xp, yp, direction };
+		return data;
+	}
+
+	int[] leftturn(int direction, int xp, int yp) {
+		switch (direction) {
+		case 1:
+			xp -= size;
+			direction = 2;
+			break;
+
+		case 2:
+			yp += size;
+			direction = 3;
+			break;
+		case 3:
+			xp += size;
+			direction = 4;
+			break;
+		case 4:
+			yp -= size;
+			direction = 1;
+			break;
+		default:
+			break;
+		}
+		int[] data = { xp, yp, direction };
+		return data;
 	}
 
 	public void add(int x, int y, int color) {
 		addFeld(x, y, color);
 	}
-	
+
 	public void addFeld(int x, int y, int color) {
 		ArrayList<int[]> t = new ArrayList<int[]>();
 		feld.add(t);
