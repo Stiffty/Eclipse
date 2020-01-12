@@ -5,12 +5,18 @@ import java.util.Random;
 
 public class Ant {
 
-	public int size = 1;
+	private  int size = 1;
 
 	public ArrayList<ArrayList<int[]>> feld = new ArrayList<ArrayList<int[]>>();
 	public byte[][] feld1 = new byte[10000][10000];
 
 	private  int[] b = new int[8];
+	
+	public static int xp = 500;
+	public static int yp = 500;
+	
+	public static int xMax = 500;
+	public static int yMax = 500;
 	
 	public Ant() {
 		// TODO Auto-generated constructor stub
@@ -31,8 +37,7 @@ public class Ant {
 	}
 
 	public void run() {
-		int xp = 500;
-		int yp = 500;
+		
 		int direction = 1;
 		int[] same = new int[2];
 		boolean there = true;
@@ -44,7 +49,19 @@ public class Ant {
 		}
 		
 		while (true) {
-
+			if(xp-size <0) {
+				xp = 0;
+			}
+			if(yp-size<0){
+				yp = 0;
+			}
+			if(xp+size >feld1.length) {
+				xp = feld1.length-1;
+			}
+			if(yp+size >feld1.length) {
+				yp = feld1.length-1;
+			}		
+			
 //			for (int x = 0; x < feld.size(); x++) {
 //				for (int y = 0; y < feld.get(x).size(); y++) {
 //					if (feld.get(x).get(y)[0] == xp ) {
@@ -137,12 +154,20 @@ public class Ant {
 			xp = same[0];
 			yp = same[1];
 			direction = same[2];
+			
+			if(xp>xMax) {
+				xMax = xp;
+			}
+			if(yp>yMax) {
+				yMax = yp;
+			}
 			try {
 				Thread.sleep(0);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 		}
 
 	}
