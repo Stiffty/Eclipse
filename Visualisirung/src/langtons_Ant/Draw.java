@@ -31,8 +31,8 @@ public class Draw extends JPanel {
 		int xr;
 		int yr;
 		for (int x = Ant.xMin+1; x < Ant.xMax; x += viewSize) {
+			xr = x + Frame.newPos.x + Frame.mouseOffsetX;
 			for (int y = Ant.yMin+1; y < Ant.yMax; y += viewSize) {
-				xr = x + Frame.newPos.x + Frame.mouseOffsetX;
 				yr = y + Frame.newPos.y + Frame.mouseOffsetY;
 				
 				if (ant.feld1[x][y] == 1) {
@@ -60,6 +60,12 @@ public class Draw extends JPanel {
 					g.setColor(Color.MAGENTA);
 					g.fillRect(xr, yr, viewSize, viewSize);
 				}
+				if(xr>width||yr>heigth) {
+					break;
+				}
+			}
+			if(xr>width) {
+				break;
 			}
 		}
 	}
