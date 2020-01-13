@@ -35,9 +35,9 @@ public class Draw extends JPanel {
 				for (int y = 0; y < width; y++) {
 					if (y % viewSize == 0 || x % viewSize == 0) {
 						g.setColor(Color.GRAY);
-						g.fillRect(x, y, viewSize, viewSize);
+						g.fillRect(x+Frame.newPos.x +Frame.mouseOffsetX, y+Frame.newPos.y +Frame.mouseOffsetY, viewSize, viewSize);
 						g.setColor(Color.BLACK);
-						g.drawRect(x, y, 1, 1);
+						g.drawRect(x+Frame.newPos.x +Frame.mouseOffsetX, y+Frame.newPos.y +Frame.mouseOffsetY, 1, 1);
 					}
 				}
 
@@ -78,28 +78,28 @@ public class Draw extends JPanel {
 				for (int y = 0; y < ant.yMax; y += viewSize) {
 					if (ant.feld1[x][y] == 1) {
 						g.setColor(Color.RED);
-						g.fillRect(x, y, viewSize, viewSize);
+						g.fillRect(x+Frame.newPos.x +Frame.mouseOffsetX, y+Frame.newPos.y +Frame.mouseOffsetY, viewSize, viewSize);
 					} else if (ant.feld1[x][y] == 2) {
 						g.setColor(Color.WHITE);
-						g.fillRect(x, y, viewSize, viewSize);
+						g.fillRect(x+Frame.newPos.x +Frame.mouseOffsetX, y+Frame.newPos.y +Frame.mouseOffsetY, viewSize, viewSize);
 					} else if (ant.feld1[x][y] == 3) {
 						g.setColor(Color.GREEN);
-						g.fillRect(x, y, viewSize, viewSize);
+						g.fillRect(x+Frame.newPos.x +Frame.mouseOffsetX, y+Frame.newPos.y +Frame.mouseOffsetY, viewSize, viewSize);
 					} else if (ant.feld1[x][y] == 4) {
 						g.setColor(Color.YELLOW);
-						g.fillRect(x, y, viewSize, viewSize);
+						g.fillRect(x+Frame.newPos.x +Frame.mouseOffsetX, y+Frame.newPos.y +Frame.mouseOffsetY, viewSize, viewSize);
 					} else if (ant.feld1[x][y] == 5) {
 						g.setColor(Color.BLUE);
-						g.fillRect(x, y, viewSize, viewSize);
+						g.fillRect(x+Frame.newPos.x +Frame.mouseOffsetX, y+Frame.newPos.y +Frame.mouseOffsetY, viewSize, viewSize);
 					} else if (ant.feld1[x][y] == 6) {
 						g.setColor(Color.CYAN);
-						g.fillRect(x, y, viewSize, viewSize);
+						g.fillRect(x+Frame.newPos.x +Frame.mouseOffsetX, y+Frame.newPos.y +Frame.mouseOffsetY, viewSize, viewSize);
 					} else if (ant.feld1[x][y] == 7) {
 						g.setColor(Color.PINK);
-						g.fillRect(x, y, viewSize, viewSize);
+						g.fillRect(x+Frame.newPos.x +Frame.mouseOffsetX, y+Frame.newPos.y +Frame.mouseOffsetY, viewSize, viewSize);
 					} else if (ant.feld1[x][y] == 8) {
 						g.setColor(Color.MAGENTA);
-						g.fillRect(x, y, viewSize, viewSize);
+						g.fillRect(x+Frame.newPos.x +Frame.mouseOffsetX, y+Frame.newPos.y +Frame.mouseOffsetY, viewSize, viewSize);
 					}
 				}
 			}
