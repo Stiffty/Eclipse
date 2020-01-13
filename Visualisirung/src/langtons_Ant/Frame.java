@@ -1,14 +1,12 @@
 package langtons_Ant;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Point;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.Position;
 
 import java.awt.event.MouseWheelListener;
 import java.awt.event.MouseWheelEvent;
@@ -53,8 +51,6 @@ public class Frame extends JFrame {
 
 				mouseOffsetX = ((lastMouse.x - e.getX()) * -1);
 				mouseOffsetY = ((lastMouse.y - e.getY()) * -1);
-
-				System.out.println(mouseOffsetX + " Y: " + mouseOffsetY);
 			}
 		});
 		contentPane.addMouseListener(new MouseAdapter() {
@@ -66,7 +62,6 @@ public class Frame extends JFrame {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				System.out.println(mouseOffsetX + " 33Y: " + mouseOffsetY);
 				newPos.x += mouseOffsetX;
 				newPos.y += mouseOffsetY;
 				mouseOffsetX = 0;
@@ -94,6 +89,7 @@ public class Frame extends JFrame {
 
 		new Thread(() -> {
 			while (true) {
+				this.setTitle("Ant | " + Ant.counter);
 				draw.repaint();
 				// draw.repaint(Ant.xp, Ant.yp, 1, 1);
 			}

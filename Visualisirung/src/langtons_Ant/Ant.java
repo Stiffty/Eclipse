@@ -17,6 +17,9 @@ public class Ant {
 	
 	public static int xMax = 500;
 	public static int yMax = 500;
+	public static int xMin = 500;
+	public static int yMin = 500;
+	public static long counter = 0;
 	
 	public Ant() {
 		// TODO Auto-generated constructor stub
@@ -49,6 +52,7 @@ public class Ant {
 		}
 		
 		while (true) {
+			
 			if(xp-size <0) {
 				xp = 0;
 			}
@@ -161,12 +165,14 @@ public class Ant {
 			if(yp>yMax) {
 				yMax = yp;
 			}
-			try {
-				Thread.sleep(0);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if(xp<xMin) {
+				xMin = xp;
 			}
+			if(yp<yMin) {
+				yMin = yp;
+			}
+			counter++;
+			
 			
 		}
 
