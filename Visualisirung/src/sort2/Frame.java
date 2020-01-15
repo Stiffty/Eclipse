@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 public class Frame extends JFrame {
 
-	private static int[] feld = new int[1000];
+	private static int[] feld = new int[500];
 	private JPanel contentPane;
 	
 	private static Draw draw = new Draw(feld);
@@ -54,7 +54,7 @@ public class Frame extends JFrame {
 	
 	public Frame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, (feld.length/(feld.length/1000)*2)+30, (int)(feld.length/(feld.length/300)*2)+50);
+		setBounds(100, 100, (feld.length/(1)*2)+30, (int)(feld.length/(10/3)*2)+50);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

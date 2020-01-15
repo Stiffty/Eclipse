@@ -38,7 +38,7 @@ public class Draw extends JPanel{
 		framecounter++;
 		
 		
-		besetzt =new boolean[(0+feld.length)/(feld.length/1000)];
+		besetzt =new boolean[(0+feld.length)/(1)];
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, super.getWidth(), super.getHeight());
@@ -58,7 +58,7 @@ public class Draw extends JPanel{
 		int x = feld.length;
 		
 		for (int i = 0; i < feld.length; i+=1) {
-			if(besetzt[(0+i)/(feld.length/1000)] != true) {
+			if(besetzt[(0+i)/(1)] != true) {
 			try {
 				double ifinal = (((feld[i]+coloroffset)*(1D/feld.length)*Math.PI*2));
 				
@@ -76,11 +76,11 @@ public class Draw extends JPanel{
 			int higth = ((feld[i])/(feld.length/300)*2);
 			int with = 1;
 			
-			g.fill3DRect((x+i)/(feld.length/1_000), y, with , higth,true);
+			g.fill3DRect((x+i)/(1), y, with , higth,true);
 			//g.fillRect((x+i)/(feld.length/1_000), y, with , higth);
 			//g.fillRect((x-i)/(feld.length/1000), y, with , higth);
-			g.fill3DRect((x-i)/(feld.length/1000), y, with , higth,true);
-			besetzt[((0+i)/(feld.length/1000))] = true;
+			g.fill3DRect((x-i)/(1), y, with , higth,true);
+			besetzt[((0+i)/(1))] = true;
 			
 		}
 		}
