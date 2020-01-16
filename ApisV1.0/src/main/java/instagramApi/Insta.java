@@ -1,17 +1,9 @@
 package instagramApi;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
 import org.apache.http.client.ClientProtocolException;
 import org.brunocvcunha.instagram4j.Instagram4j;
-import org.brunocvcunha.instagram4j.requests.InstagramGetUserFollowersRequest;
-import org.brunocvcunha.instagram4j.requests.InstagramSearchUsernameRequest;
 import org.brunocvcunha.instagram4j.requests.InstagramUploadPhotoRequest;
-import org.brunocvcunha.instagram4j.requests.payload.InstagramGetUserFollowersResult;
-import org.brunocvcunha.instagram4j.requests.payload.InstagramSearchUsernameResult;
-import org.brunocvcunha.instagram4j.requests.payload.InstagramUserSummary;
 
 public class Insta {
 
