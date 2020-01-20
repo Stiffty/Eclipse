@@ -1,21 +1,12 @@
 package queueV1;
 
 
-public class Queue {
+public class Queue<E> {
 
 	private Node head;
 	private Node tail;
 	
-	private Object dataType;
-	
-	public Queue(Object object) {
-		// TODO Auto-generated constructor stub
-		dataType = object;
-	}
-
-	public void enqueue(Object ob){
-		if(ob.getClass().equals(dataType.getClass())){
-			
+	public void enqueue(E ob){
 			if(head == null&&tail==null){
 				Node n = new Node(ob, null);
 				head = n;
@@ -25,17 +16,13 @@ public class Queue {
 				tail.setNext(n);
 				tail = n;
 			}
-			
-		}else{
-			System.out.println("Wrong Data Type!!");
-		}
 	}
 	
-	public Object dequeue(){
+	public E dequeue(){
 		Node r = head;
 		head = r.getNext();
 		
-		return r.getData();
+		return (E) r.getData();
 	}
 	
 	public boolean isEmty(){

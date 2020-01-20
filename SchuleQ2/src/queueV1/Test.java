@@ -3,7 +3,7 @@ package queueV1;
 public class Test {
 
 	private int i;
-
+	
 	public Test(int t) {
 		// TODO Auto-generated constructor stub
 		i = t;
@@ -12,7 +12,7 @@ public class Test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Queue q = new Queue(new Test(0));
+		Queue<Test> q = new Queue<Test>();
 		
 		q.enqueue(new Test(2));
 		q.enqueue(new Test(3));
@@ -23,7 +23,7 @@ public class Test {
 
 		Test o;
 		while (!q.isEmty()) {
-			o =  (Test) q.dequeue();
+			o =  q.dequeue();
 			System.out.println(o.getI());
 		}
 
