@@ -11,11 +11,10 @@ public class Insta {
 		// TODO Auto-generated method stub
 		// Login to instagram
 		try {
-			Instagram4j instagram = Instagram4j.builder().username("eli.ach@gmx.de").password("Elias.acht").build();
+			Instagram4j instagram = Instagram4j.builder().username("eli.acht@gmx.de").password("").build();
+			
 			instagram.setup();
-			
-			//instagram.login();
-			
+			instagram.login();
 			
 			instagram.sendRequest(new InstagramUploadPhotoRequest(
 			        new File("C:\\Users\\elach\\Pictures\\Reddit\\I choose you.jpg"),
