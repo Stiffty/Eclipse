@@ -14,18 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.jreddit.entity.Submission;
-import com.github.jreddit.entity.Subreddit;
 import com.github.jreddit.entity.User;
 import com.github.jreddit.retrieval.Submissions;
-import com.github.jreddit.retrieval.Subreddits;
 import com.github.jreddit.retrieval.params.SubmissionSort;
-import com.github.jreddit.retrieval.params.SubredditsView;
-import com.github.jreddit.utils.restclient.HttpRestClient;
 import com.github.jreddit.utils.restclient.PoliteHttpRestClient;
 import com.github.jreddit.utils.restclient.RestClient;
 
 public class FirstTest {
 
+	public Resizer resizer = new Resizer();
+	
 	public FirstTest() {
 		List<String> login;
 		List<Submission> subredd;
@@ -87,8 +85,10 @@ public class FirstTest {
 			
 			website = new URL(url);
 			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-			FileOutputStream fos = new FileOutputStream("C:\\Users\\elach\\Pictures\\Reddit\\" + name + "."+dateiEndung[dateiEndung.length-1]);
+			String imagePath = "C:\\Users\\elach\\Pictures\\Reddit\\" + name + "."+dateiEndung[dateiEndung.length-1];
+			FileOutputStream fos = new FileOutputStream(imagePath);
 			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+			resizer.resize(imagePath, imagePath, 1080, 1350);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
