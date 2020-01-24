@@ -85,7 +85,7 @@ public class FirstTest {
 			
 			website = new URL(url);
 			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-			String imagePath = "C:\\Users\\elach\\Pictures\\Reddit\\" + name + "."+dateiEndung[dateiEndung.length-1];
+			String imagePath = "C:\\Users\\elach\\Pictures\\Reddit\\" + name + ".jpg";
 			FileOutputStream fos = new FileOutputStream(imagePath);
 			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 			resizer.resize(imagePath, imagePath, 1080, 1350);
