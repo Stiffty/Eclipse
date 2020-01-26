@@ -41,7 +41,9 @@ public class Resizer {
 	                .lastIndexOf(".") + 1);
 	 
 	        // writes to output file
-	        ImageIO.write(outputImage, formatName, new File(outputImagePath));
+	        ImageIO.write(outputImage, "jpg", new File(outputImagePath));
+	        
+	        inputFile.delete();
 	    }
 	 
 	    /**

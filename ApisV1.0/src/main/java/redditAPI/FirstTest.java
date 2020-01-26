@@ -85,10 +85,11 @@ public class FirstTest {
 			
 			website = new URL(url);
 			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-			String imagePath = "C:\\Users\\elach\\Pictures\\Reddit\\" + name + ".jpg";
+			String imagePath = "C:\\Users\\elach\\Pictures\\Reddit\\" + name +"." +dateiEndung[dateiEndung.length-1];
 			FileOutputStream fos = new FileOutputStream(imagePath);
 			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-			resizer.resize(imagePath, imagePath, 1080, 1350);
+			System.out.println(imagePath);
+			resizer.resize(imagePath, "C:\\Users\\elach\\Pictures\\Reddit\\" + name +".jpg", 1080, 1350);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
