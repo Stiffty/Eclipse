@@ -92,7 +92,6 @@ public class FirstTest {
 			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 			System.out.println(imagePath);
 			resizer.resize(imagePath, "C:\\Users\\elach\\Pictures\\Reddit\\" + name +".jpg", 1080, 1350);
-			 Files.deleteIfExists(Paths.get(imagePath));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
