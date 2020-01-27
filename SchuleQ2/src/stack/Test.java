@@ -1,6 +1,6 @@
 package stack;
 
-public class Test  {
+public class Test {
 
     private int testValue;
 
@@ -8,7 +8,7 @@ public class Test  {
         this.testValue = testValue;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Stack<Test> s = new Stack<Test>();
 
         for (int i = 0; i < 1000; i++) s.push(new Test(i));
