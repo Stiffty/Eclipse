@@ -4,8 +4,12 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
+
+import com.ctc.wstx.sr.InputProblemReporter;
 
 public class Resizer {
 
@@ -27,6 +31,8 @@ public class Resizer {
 	        File inputFile = new File(inputImagePath);
 	        BufferedImage inputImage = ImageIO.read(inputFile);
 	 
+	        //System.out.println(inputFile.delete());
+	       
 	        // creates output image
 	        BufferedImage outputImage = new BufferedImage(scaledWidth,
 	                scaledHeight, inputImage.getType());
@@ -39,11 +45,10 @@ public class Resizer {
 	        // extracts extension of output file
 	        String formatName = outputImagePath.substring(outputImagePath
 	                .lastIndexOf(".") + 1);
-	 
+	
 	        // writes to output file
 	        ImageIO.write(outputImage, "jpg", new File(outputImagePath));
-	        
-	        inputFile.delete();
+		  
 	    }
 	 
 	    /**

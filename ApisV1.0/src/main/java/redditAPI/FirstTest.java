@@ -10,6 +10,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,6 +92,7 @@ public class FirstTest {
 			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 			System.out.println(imagePath);
 			resizer.resize(imagePath, "C:\\Users\\elach\\Pictures\\Reddit\\" + name +".jpg", 1080, 1350);
+			 Files.deleteIfExists(Paths.get(imagePath));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
