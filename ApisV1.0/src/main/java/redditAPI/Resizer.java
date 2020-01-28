@@ -24,8 +24,8 @@ public class Resizer {
 //			e.printStackTrace();
 //		}
 //	}
-	 public void resize(String inputImagePath,
-	            String outputImagePath, int scaledWidth, int scaledHeight)
+	 public static void resize(String inputImagePath,
+							   String outputImagePath, int scaledWidth, int scaledHeight)
 	            throws IOException {
 	        // reads input image
 	        File inputFile = new File(inputImagePath);
