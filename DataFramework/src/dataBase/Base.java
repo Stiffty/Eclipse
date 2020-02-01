@@ -23,8 +23,8 @@ public class Base<E> implements Serializable{
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (oos!= null) try{oos.close();} catch (IOException e){};
-            if (fos!= null) try{fos.close();} catch (IOException e){};
+            if (oos!= null) try{oos.close();} catch (IOException e){}
+            if (fos!= null) try{fos.close();} catch (IOException e){}
         }
     }
 

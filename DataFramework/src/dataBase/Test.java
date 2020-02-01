@@ -6,7 +6,7 @@ public class Test {
 
         System.out.println(b.getData(0));
 
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 10000; i++) {
             b.getData(i).sayHello();
         }
 //        b.add(new Data());
