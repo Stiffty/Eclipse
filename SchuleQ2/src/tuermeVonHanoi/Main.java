@@ -7,6 +7,5 @@ public class Main {
 
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         MainGUI g = new MainGUI();
-        g.setVisible(true);
     }
 }
