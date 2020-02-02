@@ -12,14 +12,14 @@ public class Draw extends JPanel {
 
     private int stickAmount = 3;
 
-    private int diskAmount = 6;
-    private int diskOffset = 10;
+    private int diskAmount = 8;
+    private int diskOffset = 20;
     /*-----Animation------*/
     private double x = -10;
     private double xMin = -10;
-    private double xMax = 10;
+    private double xMax = 20;
 
-    private double stretch = 1;
+    private double stretch = 3;
     private double moveOffset = 0.01;
     private int objectSizeWidth = 30;
     private  int objectSizeHeight = 30;
@@ -46,7 +46,12 @@ public class Draw extends JPanel {
         }
 
         for (int i = 0; i < diskAmount; i++) {
-            g.fillRect(((baseWidth/stickAmount)-(baseWidth/(stickAmount*2)))-((baseWidth/stickAmount)-(diskOffset*(i+1)))/2,baseY-((diskOffset)*(i+1)),(baseWidth/stickAmount)-(diskOffset*i),diskOffset);
+            g.setColor(new Color(
+                    (int)((Math.sin(i)+1)/2*255),
+                    (int)((Math.cos(i)+1)/2*255),
+                    (int)((-Math.sin(i)+1)/2*255)
+            ));
+            g.fillRect(((baseWidth/stickAmount)*(1)-(baseWidth/(stickAmount*2)))-((baseWidth/stickAmount)-(diskOffset*(i+1)))/2,baseY-((diskOffset)*(i+1)),(baseWidth/stickAmount)-(diskOffset*i),diskOffset);
         }
     }
 
