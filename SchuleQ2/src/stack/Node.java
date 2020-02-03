@@ -1,28 +1,28 @@
 package stack;
 
-public class Node {
+public class Node<E> {
 
-    private Object data;
-    private Node next;
+    private E data;
+    private Node<E> next;
 
-    public Node(Object data, Node next) {
-        this.data = data;
+    public Node(E data, Node<E> next) {
+        this.data = (E) data;
         this.next = next;
     }
 
-    public Object getData() {
+    public E getData() {
         return data;
     }
 
-    public Node getNext() {
+    public Node<E> getNext() {
         return next;
     }
 
-    public void setData(int data) {
+    public void setData(E data) {
         this.data = data;
     }
 
-    public void setNext(Node next) {
+    public void setNext(Node<E> next) {
         this.next = next;
     }
 }
