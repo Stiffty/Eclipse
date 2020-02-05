@@ -49,6 +49,9 @@ public class Draw extends JPanel {
 
     private boolean finished = false;
 
+    /*Debug*/
+    private int counter = 0;
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -57,7 +60,6 @@ public class Draw extends JPanel {
 
         drawBase(g);
 
-        System.out.println(isMoving);
         if (!isMoving)
             debugMove(g);
 
@@ -73,7 +75,12 @@ public class Draw extends JPanel {
         int r = rand.nextInt(sticks.size());
         int r2 = rand.nextInt(sticks.size());
 
-        moveWithAni(g, 0, 2);
+        if(counter > 2){
+            moveWithAni(g, 2, 1);
+        }else {
+            moveWithAni(g,0,2);
+        }
+        counter++;
     }
 
     private void moveWithAni(Graphics g, int r, int r2) {
@@ -284,9 +291,14 @@ public class Draw extends JPanel {
             y = d.getY();
             int[] end = endpos;
 
-            while (y>((a * Math.pow(x, 2)) + (x * stretch) + c))  {
+
+
+            double yb = d.getY();
+            System.out.println(Math.pow(y,2)/250);
+
+            while (((int) Math.pow(y,2)/yb)>((a * Math.pow(x, 2)) + (x * stretch) + c)){
                 y-=0.1;
-                d.setY((int) y);
+                d.setY((int) ((int) Math.pow(y,2)/yb));
                 try {
                     Thread.sleep(1);
                 } catch (InterruptedException e) {
@@ -294,7 +306,9 @@ public class Draw extends JPanel {
                 }
             }
 
-            while (x < x2) {
+            System.out.printf("x: %s x1: %s x2: %s%n",x,x1,x2);
+
+            while (x1 > x2? x>x2 :x<x2) {
                 try {
                     Thread.sleep(1);
                 } catch (InterruptedException e) {
@@ -306,17 +320,17 @@ public class Draw extends JPanel {
                 d.setX((int) (x-(d.getWidth()/2)));
                 d.setY((int) y);
 
-                debugAnimationPath(g, x1, x2);
+                //debugAnimationPath(g, x1, x2);
 //////                drawBase(g);
 //////                drawDisks(g);
-                x += 0.1;
-
+                x += x1 > x2? -0.1 :  0.1;
             }
 
             d.setX(end[0]);
-            while (y<end[1])  {
+            int oldY = d.getY();
+            while ((int) (Math.pow(y,2)/oldY)<end[1])  {
                 y+=0.1;
-                d.setY((int) y);
+                d.setY((int) Math.pow(y,2)/oldY);
                 try {
                     Thread.sleep(1);
                 } catch (InterruptedException e) {
@@ -354,7 +368,6 @@ public class Draw extends JPanel {
             System.out.println("switched");
         }
 
-        System.out.println("Test111");
 
         for (double i = x1; i < x2; i += moveOffset) {
             y = (a * Math.pow(i, 2)) + (i * stretch) + c;
