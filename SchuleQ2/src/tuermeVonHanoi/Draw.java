@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class Draw extends JPanel {
 
-    private List<Stack<Disk>> sticks = new ArrayList<>();
+    private static List<Stack<Disk>> sticks = new ArrayList<>();
 
     /*Base Generation*/
     private int baseX = 10;
@@ -31,6 +31,7 @@ public class Draw extends JPanel {
 
     /*-----Animation------*/
     private double x = -20;
+    private double y;
     private double xMin = -80;
     private double xMax = 90;
 
@@ -44,6 +45,8 @@ public class Draw extends JPanel {
     private double xOffset = 100;
     private double yOffset = 400;
 
+    private static boolean isMoving = false;
+
     private boolean finished = false;
 
     public void paintComponent(Graphics g) {
@@ -54,10 +57,11 @@ public class Draw extends JPanel {
 
         drawBase(g);
 
+        System.out.println(isMoving);
+        if (!isMoving)
+            debugMove(g);
+
         drawDisks(g);
-
-        debugMove(g);
-
         //testCalculation(-1,1,3,-1,5,7);
         //testCalculation(-4/3, -7/3, 4/3, 3, 2,1);
 
@@ -67,37 +71,35 @@ public class Draw extends JPanel {
         Random rand = new Random();
 
         int r = rand.nextInt(sticks.size());
-        if (!sticks.get(r).isEmpty()) {
-            int r2 = rand.nextInt(sticks.size() );
-            if (r2 != r) {
-                Disk d = sticks.get(r).peek();
+        int r2 = rand.nextInt(sticks.size());
 
-                xOffset = ((stickPos[r] + stickPos[r2]) / 2) + (stickWidth[0] / 2);
-                yOffset = ((baseY / 2) + (d.getHeight() * calculateDiskHeight(0)));
+        moveWithAni(g, 0, 2);
+    }
 
-                Disk d2 = d;
+    private void moveWithAni(Graphics g, int r, int r2) {
+        Disk d = sticks.get(r).peek();
 
-                d.setX(calculateDiskX(r2, d));
-                d.setY(calculateDiskY(r2, sticks.get(r2).length()));
+        double[] poses = calculatePosX(r, r2);
 
-                double[] poses = calculatePosX(r,r2);
-                animation(g,poses[0],calculatePosY(calculateDiskY(r, sticks.get(r).length())),poses[1],calculatePosY(calculateDiskY(r2, sticks.get(r2).length())),0,-400);
-               //animation(g,d.getX(),d.getY(),d2.getX(),d2.getY(),10,10);
+        int[] endPos = new int[2];
 
-                sticks.get(r).pop();
+        endPos[0] = calculateDiskX(r2, d);
+        endPos[1] = calculateDiskY(r2, sticks.get(r2).length());
 
+        animation(g, poses[0], calculatePosY(0), poses[1], calculatePosY(0), (poses[0] + poses[1]) / 2, 100, d,endPos);
 
-                System.out.printf("(Debug) x1 = %s y1 = %s x2 = %s y2 = %s x3 = %s x4= %s %n",poses[0],calculatePosY(calculateDiskY(r, sticks.get(r).length())),poses[1],calculatePosY(calculateDiskY(r2, sticks.get(r2).length())),xOffset,yOffset);
+        /*Debug*/
+        g.setColor(d.getColor());
+        g.fillRect((int) poses[0], (int) calculatePosY(0), 10, 10);
+        g.fillRect((int) poses[1], (int) calculatePosY(0), 10, 10);
+        g.fillRect(10, 100, 10, 10);
 
-                sticks.get(r2).push(d);
+        //animation(g,d.getX(),d.getY(),d2.getX(),d2.getY(),10,10);
 
-                try {
-                    Thread.sleep(800);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        System.out.printf("(Debug) x1 = %s y1 = %s x2 = %s y2 = %s x3 = %s x4= %s %n", poses[0], calculatePosY(calculateDiskY(r, sticks.get(r).length())), poses[1], calculatePosY(calculateDiskY(r2, sticks.get(r2).length())), xOffset, yOffset);
+        sticks.get(r).pop();
+        sticks.get(r2).push(d);
+
     }
 
     private void drawBase(Graphics g) {
@@ -174,13 +176,13 @@ public class Draw extends JPanel {
         }
     }
 
-    private void testCalculation(double x1, double y1, double x2, double y2, double x3 ,double y3) {
+    private void testCalculation(double x1, double y1, double x2, double y2, double x3, double y3) {
         double b1 = 1;
         double b2 = 1;
         double b3 = 1;
 
         double b4 = 1;
-        double b5= 1;
+        double b5 = 1;
 
         double a1 = 1;
         double a2 = 1;
@@ -203,23 +205,23 @@ public class Draw extends JPanel {
         b3 = b3 * x3;
         a3 = Math.pow(x3, 2);
 
-        a4 = a2-a1;
-        b4 = b2-b1;
-        y1 = y2-y1;
+        a4 = a2 - a1;
+        b4 = b2 - b1;
+        y1 = y2 - y1;
 
-        a5 = a3-a2;
-        b5 = b3-b2;
-        y2 = y3-y2;
+        a5 = a3 - a2;
+        b5 = b3 - b2;
+        y2 = y3 - y2;
 
-        a5 = a5*-(b4/b5);
-        y2 = y2*-(b4/b5);
-        b5 = b5*-(b4/b5);
+        a5 = a5 * -(b4 / b5);
+        y2 = y2 * -(b4 / b5);
+        b5 = b5 * -(b4 / b5);
 
-        af = (y1+y2)/(a4+a5);
+        af = (y1 + y2) / (a4 + a5);
 
-        bf = (y1-(a4*af))/b4;
+        bf = (y1 - (a4 * af)) / b4;
 
-        cf = y3-((af*a3)+(bf*x3));
+        cf = y3 - ((af * a3) + (bf * x3));
 
 
 //        y1 = y1 - x1;
@@ -240,66 +242,108 @@ public class Draw extends JPanel {
         stretch = bf;
         c = cf;
         a = af;
-        System.out.printf("(Debug) 1: b1 = %s x1 = %s y1 = %s a1 = %s 2: b2 = %s x2 = %s y2 = %s a2 = %s 3: b3 = %s x3 = %s y3 = %s a3 = %s Final: b = %s y = %s c = %s a = %s%n", b1, x1, y1,a1, b2, x2, y2,a2,b3, x3, y3,a3, bf, yf, cf,af);
-        System.out.printf("(Debug) 4: b4 = %s a4 = %s 5: b5 = %s a5 = %s%n",b4,a4,b5,a5);
+        System.out.printf("(Debug) 1: b1 = %s x1 = %s y1 = %s a1 = %s 2: b2 = %s x2 = %s y2 = %s a2 = %s 3: b3 = %s x3 = %s y3 = %s a3 = %s Final: b = %s y = %s c = %s a = %s%n", b1, x1, y1, a1, b2, x2, y2, a2, b3, x3, y3, a3, bf, yf, cf, af);
+        System.out.printf("(Debug) 4: b4 = %s a4 = %s 5: b5 = %s a5 = %s%n", b4, a4, b5, a5);
     }
 
-    private double[] calculatePosX(int stick,int stick1){
-        double mid = (stickPos[stick] + stickPos[stick1]) / 2;
+    private double[] calculatePosX(int stick, int stick1) {
+//        double mid = (stickPos[stick] + stickPos[stick1]) / 2;
+//        double[] poses = new double[2];
+//        poses[0] = stickPos[stick]-mid;
+//        poses[1] = stickPos[stick1]-mid;
+//        return  poses;
+        double mid = (baseX + baseWidth) / 2;
         double[] poses = new double[2];
-        poses[0] = stickPos[stick]-mid;
-        poses[1] = stickPos[stick1]-mid;
-        return  poses;
+        poses[0] = stickPos[stick] + (stickWidth[stick] / 2);
+        poses[1] = stickPos[stick1] + (stickWidth[stick1] / 2);
+        System.out.println("TT" + poses[0]);
+        return poses;
+
     }
 
-    private double calculatePosY(int y){
-        System.out.println(y);
-        return  (baseY+stickHeight[0])-y;
+    private double calculatePosY(int stick) {
+        System.out.println(stick);
+        return baseY + stickHeight[0];
     }
 
-    private void animation(Graphics g, double x1, double y1, double x2, double y2,double x3, double y3) {
+    private void animation(Graphics g, double x1, double y1, double x2, double y2, double x3, double y3, Disk d,int[] endpos) {
 
-        if (xMin == 0 && xMax == 0) {
-            //xMin = stickPos[0]-stickPos[1];
-            //xMax = stickPos[1]-stickPos[0];
-            //x = stickPos[0]-stickPos[1];
+        testCalculation(x1, y1, x2, y2, x3, y3);
 
-        }
-
-        testCalculation(x1,y1,x2,y2,x3,y3);
-
-//        xOffset = ((stickPos[stick1] + stickPos[stick2]) / 2) + (stickWidth[0] / 2);
-//        yOffset = (baseY / 2) + (height * calculateDiskHeight(0));
 
         System.out.printf("(Debug) Min: %s Max: %s Pos: %s%n", x1, x2, x);
 
-        if (x > xMax) {
-            finished = true;
-        } else if (x < xMin) {
-            finished = false;
-        }
+       // debugAnimationPath(g, x1, x2);
 
-        int y = (int) (Math.pow(x, 2) / stretch);
 
-        debugAnimationPath(g,x1,x2);
+        System.out.println("d.fererer");
 
-        g.setColor(Color.BLACK);
-        //g.fillRect((int) (Double.sum(xOffset, x) - (objectSizeWidth / 2)), (int) (y + yOffset), objectSizeWidth, objectSizeHeight);
+        new Thread(() -> {
+            isMoving = true;
+            x = x1;
+            y = d.getY();
+            int[] end = endpos;
 
-        if (!finished) {
-            x += 0.1;
-        } else {
-            x -= 0.1;
-        }
+            while (y>((a * Math.pow(x, 2)) + (x * stretch) + c))  {
+                y-=0.1;
+                d.setY((int) y);
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+            while (x < x2) {
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                y = (a * Math.pow(x, 2)) + (x * stretch) + c;
+
+                d.setX((int) (x-(d.getWidth()/2)));
+                d.setY((int) y);
+
+                debugAnimationPath(g, x1, x2);
+//////                drawBase(g);
+//////                drawDisks(g);
+                x += 0.1;
+
+            }
+
+            d.setX(end[0]);
+            while (y<end[1])  {
+                y+=0.1;
+                d.setY((int) y);
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            isMoving = false;
+        }).start();
+//        d.setX((int) x);
+//        d.setY((int) y);
+//
+//        if (!finished) {
+//            x += 0.1;
+//        } else {
+//            isMoving = false;
+//        }
+//
+//        try {
+//            Thread.sleep(1);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
-    private void debugAnimationPath(Graphics g,double x1,double x2) {
+    private void debugAnimationPath(Graphics g, double x1, double x2) {
         g.setColor(Color.RED);
         double y;
 
@@ -310,11 +354,13 @@ public class Draw extends JPanel {
             System.out.println("switched");
         }
 
+        System.out.println("Test111");
+
         for (double i = x1; i < x2; i += moveOffset) {
-            y = (a*Math.pow(i,2))+(i*stretch)+c;
-           // y*=-1;
-           // g.fillRect((int) Double.sum(xOffset, i), (int) Double.sum((Math.pow(i, 2) / stretch), yOffset), 2, 2);
-            g.fillRect((int) Double.sum(xOffset, i),(int) Double.sum(y,yOffset),2,2);
+            y = (a * Math.pow(i, 2)) + (i * stretch) + c;
+            // y*=-1;
+            // g.fillRect((int) Double.sum(xOffset, i), (int) Double.sum((Math.pow(i, 2) / stretch), yOffset), 2, 2);
+            g.fillRect((int) i, (int) y, 1, 1);
 
         }
     }
