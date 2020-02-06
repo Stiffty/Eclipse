@@ -75,7 +75,11 @@ public class Draw extends JPanel {
         int r = rand.nextInt(sticks.size());
         int r2 = rand.nextInt(sticks.size());
 
-        if(counter > 2){
+        if(counter >= diskAmount*3){
+            counter = -1;
+        }else if(counter >= diskAmount*2){
+            moveWithAni(g, 1, 0);
+        }else if(counter >= diskAmount){
             moveWithAni(g, 2, 1);
         }else {
             moveWithAni(g,0,2);
@@ -290,6 +294,7 @@ public class Draw extends JPanel {
             x = x1;
             y = d.getY();
             int[] end = endpos;
+            double sleep = 1;
 
 
 
@@ -300,7 +305,7 @@ public class Draw extends JPanel {
                 y-=0.1;
                 d.setY((int) ((int) Math.pow(y,2)/yb));
                 try {
-                    Thread.sleep(1);
+                    Thread.sleep((long) sleep);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -310,7 +315,7 @@ public class Draw extends JPanel {
 
             while (x1 > x2? x>x2 :x<x2) {
                 try {
-                    Thread.sleep(1);
+                    Thread.sleep((long) sleep);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -332,7 +337,7 @@ public class Draw extends JPanel {
                 y+=0.1;
                 d.setY((int) Math.pow(y,2)/oldY);
                 try {
-                    Thread.sleep(1);
+                    Thread.sleep((long) sleep);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
