@@ -49,11 +49,14 @@ public class Draw extends JPanel {
 
     private boolean finished = false;
 
+    private double x1s;
+    private double x2s;
     /*Debug*/
     private int counter = 0;
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
 
         if (sticks.size() == 0)
             generatePlayGround(g);
@@ -64,6 +67,8 @@ public class Draw extends JPanel {
             debugMove(g);
 
         drawDisks(g);
+
+        debugAnimationPath(g,x1s,x2s);
         //testCalculation(-1,1,3,-1,5,7);
         //testCalculation(-4/3, -7/3, 4/3, 3, 2,1);
 
@@ -287,6 +292,9 @@ public class Draw extends JPanel {
        // debugAnimationPath(g, x1, x2);
 
 
+        x1s = x1;
+        x2s = x2;
+
         System.out.println("d.fererer");
 
         new Thread(() -> {
@@ -325,7 +333,6 @@ public class Draw extends JPanel {
                 d.setX((int) (x-(d.getWidth()/2)));
                 d.setY((int) y);
 
-                //debugAnimationPath(g, x1, x2);
 //////                drawBase(g);
 //////                drawDisks(g);
                 x += x1 > x2? -0.1 :  0.1;
@@ -374,12 +381,12 @@ public class Draw extends JPanel {
         }
 
 
-        for (double i = x1; i < x2; i += moveOffset) {
+        for (double i = x1; i < x2; i += 1) {
             y = (a * Math.pow(i, 2)) + (i * stretch) + c;
+
             // y*=-1;
             // g.fillRect((int) Double.sum(xOffset, i), (int) Double.sum((Math.pow(i, 2) / stretch), yOffset), 2, 2);
-            g.fillRect((int) i, (int) y, 1, 1);
-
+            g.fillRect((int) i, (int) y, 2, 2);
         }
     }
 }
