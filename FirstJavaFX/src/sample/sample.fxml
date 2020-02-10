@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.ParallelCamera?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Box?>
+
+<GridPane alignment="center" hgap="10" prefHeight="575.0" prefWidth="500.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+      <ColumnConstraints maxWidth="270.0" minWidth="270.0" prefWidth="270.0" />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="354.0" prefWidth="299.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <children>
+            <HBox alignment="TOP_CENTER" layoutX="90.0" layoutY="82.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <TextField fx:id="text1" alignment="TOP_LEFT" onAction="#gh" opacity="0.45" prefHeight="29.0" prefWidth="222.0" />
+                  <Separator opacity="0.0" prefWidth="200.0" />
+                  <TextField alignment="TOP_RIGHT" prefHeight="26.0" prefWidth="101.0" />
+               </children>
+            </HBox>
+            <Box cullFace="FRONT" depth="100" drawMode="LINE" height="100" layoutX="71.0" layoutY="275.0" nodeOrientation="LEFT_TO_RIGHT" rotate="59.0" width="100" />
+            <ParallelCamera layoutX="244.0" layoutY="275.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane minHeight="200.0" minWidth="200.0" prefHeight="373.0" prefWidth="224.0" GridPane.rowIndex="1">
+         <children>
+            <ProgressIndicator fx:id="prozent" layoutX="84.0" layoutY="113.0" prefHeight="45.0" prefWidth="53.0" progress="0.0" />
+            <Button fx:id="button1" layoutX="64.0" layoutY="201.0" mnemonicParsing="false" onMouseClicked="#prozentup" prefHeight="32.0" prefWidth="84.0" text="Button">
+               <effect>
+                  <Glow level="0.58">
+                     <input>
+                        <DropShadow />
+                     </input>
+                  </Glow>
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="CROSSHAIR" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="193.0" prefWidth="268.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <children>
+            <TableView fx:id="table" layoutX="35.0" layoutY="-6.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Test1" />
+                <TableColumn prefWidth="75.0" text="Test1" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+         <children>
+            <Button fx:id="addColumn" layoutX="56.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#add" text="Add Column" />
+            <TextField fx:id="columnName" layoutX="28.0" layoutY="64.0" text="Name" />
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>

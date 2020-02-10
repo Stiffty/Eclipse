@@ -18,12 +18,10 @@ public class Draw extends JPanel {
         super.paintComponent(g);
 
         g.setColor(Color.BLACK);
+        g.fillPolygon(new int[]{120, 80,100,120,100,60}, new int[]{120, 120,80,55,55,60},6);
 
-
-
-        g.fillPolygon(new int[]{120, 120,100}, new int[]{120, 120,120},3);
-
-
+        g.setColor(Color.GREEN);
+        g.fillRect( 80,80,10,10);
         /*Z-Achse*/
         g.setColor(Color.GREEN);
         for (int i = 0; i < zwidth; i++) {
