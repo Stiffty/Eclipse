@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.ParallelCamera?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ProgressIndicator?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.Glow?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Box?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<GridPane alignment="center" hgap="10" prefHeight="575.0" prefWidth="500.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane alignment="center" hgap="10" prefHeight="575.0" prefWidth="500.0" style="-fx-vgap: RED;" vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
@@ -39,7 +28,7 @@
                   <TextField alignment="TOP_RIGHT" prefHeight="26.0" prefWidth="101.0" />
                </children>
             </HBox>
-            <Box cullFace="FRONT" depth="100" drawMode="LINE" height="100" layoutX="71.0" layoutY="275.0" nodeOrientation="LEFT_TO_RIGHT" rotate="59.0" width="100" />
+            <Box fx:id="box" cullFace="FRONT" depth="100" drawMode="LINE" height="100" layoutX="71.0" layoutY="275.0" nodeOrientation="LEFT_TO_RIGHT" rotate="59.0" width="100" />
             <ParallelCamera layoutX="244.0" layoutY="275.0" />
          </children>
       </AnchorPane>

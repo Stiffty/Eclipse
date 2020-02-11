@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Box;
 
 import javax.swing.*;
 
@@ -17,6 +18,7 @@ public class Controller {
     public TextField columnName;
     public Button addColumn;
     private final ObservableList<Testdata> data =  FXCollections.observableArrayList(new Testdata("23","Tom"),new Testdata("33","Tim"));
+    public Box box;
 
     public void gh(ActionEvent actionEvent) {
         text1.setText("Hallo");
@@ -34,6 +36,7 @@ public class Controller {
                 new PropertyValueFactory<Testdata, String>("name"));
         table.getColumns().addAll(tb);
         table.setItems(data);
+        box.setRotate(box.getRotate()+30);
     }
 }
 
