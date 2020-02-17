@@ -20,76 +20,31 @@ public class Draw extends JPanel {
 
     private int width = 4;
 
-    private int pointcounter = 0;
-    private List<Point> points = new ArrayList<>();
 
-    private final boolean showPointInfo = false;
-    private boolean initDone = false;
-    private int anzahlpunkte = -1;
+    private Math m = new Math();
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         this.g = g;
 
         init();
 
         drawAchses(g);
+        m.drawBox(50, 50, 50, 100);
+//        m.rotateAllX(0.001);
+//        m.rotateAllY(0.001);
+//        m.rotatePointXY(0.001,7);
 
-//        addPoint(60, 0, 0);
-//        addPoint(60, 60, 0);
-//        addPoint(0, 60, 0);
-//        addPoint(0, 0, 0);
-//
-//        addPoint(60, 60, 60);
-//        addPoint(60, 0, 60);
-//        addPoint(0, 0, 60);
-//        addPoint(0, 60, 60);
-        drawBox(60,40,80,60);
-        initDone = true;
+//        m.drawBox(-200, 20, 20, 40);
+//        m.drawBox(200, 200, 20, 40);
+//        m.drawBox(-200, -200, 20, 40);
+       //m.addPoint(30,40,50);
+        m.getConnectPoints();
+
+        m.setInitDone(true);
         //addPoint(-30,20,10);
-
-
-
-        System.out.println(pointcounter);
     }
 
-    public void drawBox(int x, int y,int z, int height){
-
-        addPoint(x+height, y, z);
-        addPoint(x+height, y+height, z);
-        addPoint(x, y+height, z);
-        addPoint(x, y, z);
-
-        addPoint(x+height, y+height, z+height);
-        addPoint(x+height, y, z+height);
-        addPoint(x, y, z+height);
-        addPoint(x, y+height, z+height);
-
-        drawFläche(points.get(0), points.get(1), points.get(2), points.get(3));
-        g.setColor(Color.BLUE);
-        drawFläche(points.get(4), points.get(5), points.get(6), points.get(7));
-        g.setColor(Color.RED);
-        drawFläche(points.get(0), points.get(1), points.get(4), points.get(5));
-        g.setColor(Color.CYAN);
-        drawFläche(points.get(1), points.get(2), points.get(7), points.get(6));
-        g.setColor(Color.GREEN);
-        drawFläche(points.get(3), points.get(2), points.get(7), points.get(6));
-        g.setColor(Color.MAGENTA);
-        drawFläche(points.get(0), points.get(3), points.get(6), points.get(5));
-    }
-
-    public void drawFläche(Point... p) {
-        int[] y = new int[p.length];
-        int[] z = new int[p.length];
-
-        for (int i = 0; i < p.length; i++) {
-            y[i] = (int) p[i].getX();
-            z[i] = (int) p[i].getY();
-        }
-
-        g.fillPolygon(y, z, p.length);
-    }
 
     private void drawAchses(Graphics g) {
         /*X-Achse*/
@@ -135,39 +90,12 @@ public class Draw extends JPanel {
         xwitdh = nullPosX / 2;
         ywidth = nullPosY / 2;
         zwidth = nullPosX / 2;
+
+        m.setG(g);
+        m.setNullPosX(nullPosX);
+        m.setNullPosY(nullPosY);
     }
 
-    public void addPoint(int x, int y, int z) {
-
-        double zP = nullPosX + (x / 2D);
-        double yP = nullPosY - (x / 2D);
-
-        yP += y;
-        zP += z;
-        System.out.printf("yP: %s zP: %s%n", yP, zP);
-
-        if (showPointInfo) {
-            g.fillRect((int) yP, (int) zP, 10, 10);
-            g.drawString("P" + pointcounter + "(" + x + "/" + y + "/" + z + "/" + ")", (int) yP, (int) zP);
-        }
-
-        if (!initDone) {
-            points.add(new Point(yP, zP));
-            pointcounter++;
-        } else {
-            if(anzahlpunkte == -1){
-                anzahlpunkte = pointcounter;
-            }
-            if(pointcounter == anzahlpunkte){
-                pointcounter = 0;
-            }
-            Point p = points.get(pointcounter);
-
-            p.setX(yP);
-            p.setY(zP);
-            pointcounter++;
-        }
-    }
 
     private int calculatePosforXy(int i) {
         return (nullPosY - (nullPosY / 4)) + i;
@@ -176,5 +104,13 @@ public class Draw extends JPanel {
     private int calculatePosforXx(int i) {
         return (nullPosX + (nullPosX / 4)) - i;
     }
-
 }
+//        addPoint(60, 0, 0);
+//        addPoint(60, 60, 0);
+//        addPoint(0, 60, 0);
+//        addPoint(0, 0, 0);
+//
+//        addPoint(60, 60, 60);
+//        addPoint(60, 0, 60);
+//        addPoint(0, 0, 60);
+//        addPoint(0, 60, 60);

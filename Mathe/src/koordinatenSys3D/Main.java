@@ -29,7 +29,11 @@ public class Main extends JFrame{
 
         getContentPane().add(draw);
 
-        new Thread(draw::repaint).start();
+        new Thread(()->{
+         while (true){
+             draw.repaint();
+         }
+        }).start();
     }
 
 }
