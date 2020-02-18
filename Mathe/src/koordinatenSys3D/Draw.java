@@ -31,7 +31,7 @@ public class Draw extends JPanel {
 
         drawAchses(g);
         m.drawBox(50, 50, 50, 100);
-//        m.rotateAllX(0.001);
+        //m.rotateAllX(0.001);
 //        m.rotateAllY(0.001);
 //        m.rotatePointXY(0.001,7);
 
@@ -39,7 +39,6 @@ public class Draw extends JPanel {
 //        m.drawBox(200, 200, 20, 40);
 //        m.drawBox(-200, -200, 20, 40);
        //m.addPoint(30,40,50);
-        m.getConnectPoints();
 
         m.setInitDone(true);
         //addPoint(-30,20,10);
