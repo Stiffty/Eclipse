@@ -1,5 +1,8 @@
 package koordinatenSys3D;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +86,7 @@ public class Math {
 //                p.setzO((z * java.lang.Math.cos(angle) + (y * java.lang.Math.sin(angle))));
     }
 
-    public void drawBox(int x, int y, int z, int height) {
+    public void drawBox( int x, int y, int z, int height) {
 
 
         g.setColor(Color.RED);
