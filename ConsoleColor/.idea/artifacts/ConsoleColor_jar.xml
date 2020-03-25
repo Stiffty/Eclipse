@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ConsoleColor:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ConsoleColor_jar</output-path>
+    <root id="archive" name="ConsoleColor.jar">
+      <element id="module-output" name="ConsoleColor" />
+    </root>
+  </artifact>
+</component>
