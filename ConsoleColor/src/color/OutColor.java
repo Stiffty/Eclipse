@@ -84,6 +84,12 @@ public class OutColor extends PrintStream {
     public void setConsoleColor(String color){
         System.out.print(color);
     }
+
+    /**
+     *
+     * @param text your Text
+     * @param color one of the final Strings of this class.
+     */
     public void printInColor(Object text,String color){
         System.out.print(color + text + RESET);
     }
