@@ -53,4 +53,26 @@ public class Algorithmen {
         }
         return Math.abs(sum1-sum2);
     }
+
+    public static void plusMinus(int[] arr) {
+        double positive = 0;
+        double negative = 0;
+        double zero = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            int number = arr[i];
+            if(number>0){
+                positive++;
+            }else if(number<0 ){
+                negative++;
+            }else{
+                zero++;
+            }
+        }
+
+        double length = arr.length;
+        System.out.println(positive/length);
+        System.out.println(negative/length);
+        System.out.println(zero/length);
+    }
 }
