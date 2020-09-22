@@ -1,0 +1,2 @@
+INDEX VERSION 1.126+/home/students/bg13f/achtniel/Home_auf_Server/Git/Eclipse3/.metadata/.plugins/org.eclipse.jdt.core
+1538811372.index
