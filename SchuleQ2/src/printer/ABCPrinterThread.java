@@ -1,4 +1,4 @@
-package threads;
+package printer;
 
 public class ABCPrinterThread extends Thread {
 
