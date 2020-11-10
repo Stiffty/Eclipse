@@ -1,6 +1,10 @@
 /ToArudino.class
+/baustellenSystem/
 /etx_ack/
 /printer/
 /rekusion/
 /sensorSystem/
-/baustellenSystem/
+/serialInterface/
+/threads/
+/tuermeVonHanoi/
+/xonxoff/
