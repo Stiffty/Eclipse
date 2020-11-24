@@ -12,7 +12,7 @@ public class UIServer {
 	public UIServer() {
 		// TODO Auto-generated constructor stub
 		try {
-			MyServer server = new MyServer(4711);
+			MultiServer server = new MultiServer(4711);
 			System.out.println("Started");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
