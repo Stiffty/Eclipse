@@ -11,7 +11,7 @@ import javax.xml.ws.Response;
 
 public class HTTPServerDK {
 
-	private int localPort = 80;
+	private int localPort;
 
 	private Socket clientSocket;
 	private ServerSocket serverSocket;
