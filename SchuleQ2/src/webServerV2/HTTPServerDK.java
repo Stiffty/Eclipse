@@ -73,11 +73,24 @@ public class HTTPServerDK {
 				 response.append(readFile("C:\\Users\\achtniel\\Downloads\\HTML5 Test Page.htm"));
 				}
 			 else{
-				 response.append(getHeader("Content-Type: image/jpeg"));
-				// response.append(readFile("C:\\Users\\achtniel\\Downloads\\" + path));
-				 clientSocket.write(response.toString());
-				 byte [] im = extractBytes("C:\\Users\\achtniel\\Downloads\\" + path);
-				 clientSocket.write(im,im.length);
+				 System.out.println(path);
+				 System.out.println(path.split("\\.")[1]);
+				 if(path.split("\\.")[1] == "htm"){
+					 response.append(getHeader("Content-Type: text/html"));
+						// response.append(readFile("C:\\Users\\achtniel\\Downloads\\" + path));
+					 response.append(readFile("C:\\Users\\achtniel\\Downloads\\" + path));
+				 }
+				 else{
+					 
+					 response.append(getHeader("Content-Type: image/jpeg"));
+						// response.append(readFile("C:\\Users\\achtniel\\Downloads\\" + path));
+						 clientSocket.write(response.toString());
+						 byte [] im = extractBytes("C:\\Users\\achtniel\\Downloads\\" + path);
+						 clientSocket.write(im,im.length);
+					 
+					 
+			
+				 }
 			 }
 
 			return response.toString();
